@@ -1501,15 +1501,15 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
         <g transform={`translate(${s(24)}, ${s(18)}) scale(${s(1.8)})`}>
           <path d={ciscoBridge} fill="rgba(255,255,255,0.9)" />
         </g>
-        <text x={s(24)} y={s(52)} fontSize={f(7)} fill="#fff" fontFamily="sans-serif" letterSpacing={s(2)}>CISCO</text>
+        <text x={s(24)} y={s(52)} fontSize={f(7)} fill="#fff" fontFamily="Inter, sans-serif" letterSpacing={s(2)}>CISCO</text>
         {/* Main title */}
-        <text x={s(24)} y={s(88)} fontSize={f(22)} fontWeight="300" fill="#fff" fontFamily="sans-serif">{slide.title}</text>
-        <text x={s(24)} y={s(108)} fontSize={f(9)} fill="#fff" fontFamily="sans-serif">{slide.subtitle.slice(0, 50)}</text>
+        <text x={s(24)} y={s(88)} fontSize={f(22)} fontWeight="300" fill="#fff" fontFamily="Inter, sans-serif">{slide.title}</text>
+        <text x={s(24)} y={s(108)} fontSize={f(9)} fill="#fff" fontFamily="Inter, sans-serif">{slide.subtitle.slice(0, 50)}</text>
         {/* Decorative line */}
         <rect x={s(24)} y={s(118)} width={s(50)} height={s(2)} rx={s(1)} fill="#00bceb" />
         {/* Bottom bar */}
         <rect x={0} y={height - s(22)} width={width} height={s(18)} fill="rgba(0,0,0,0.2)" />
-        <text x={s(24)} y={height - s(9)} fontSize={f(6)} fill="#fff" fontFamily="sans-serif" letterSpacing={s(1.5)}>CORPORATE MESSAGING FRAMEWORK</text>
+        <text x={s(24)} y={height - s(9)} fontSize={f(6)} fill="#fff" fontFamily="Inter, sans-serif" letterSpacing={s(1.5)}>CORPORATE MESSAGING FRAMEWORK</text>
       </svg>
     );
   }
@@ -1534,10 +1534,10 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
         {/* Top accent */}
         <rect x={0} y={0} width={width} height={s(3)} fill={acc} />
         {/* Label */}
-        <text x={s(20)} y={s(20)} fontSize={f(6)} fill={fgSoft} fontFamily="sans-serif" letterSpacing={s(2)}>SOLUTION CATEGORY</text>
+        <text x={s(20)} y={s(20)} fontSize={f(6)} fill={fgSoft} fontFamily="Inter, sans-serif" letterSpacing={s(2)}>SOLUTION CATEGORY</text>
         {/* Title */}
-        <text x={s(20)} y={s(42)} fontSize={f(15)} fontWeight="300" fill={fg} fontFamily="sans-serif">{slide.title.slice(0, 32)}</text>
-        <text x={s(20)} y={s(58)} fontSize={f(7.5)} fill={fgSoft} fontFamily="sans-serif">{slide.subtitle.slice(0, 55)}</text>
+        <text x={s(20)} y={s(42)} fontSize={f(15)} fontWeight="300" fill={fg} fontFamily="Inter, sans-serif">{slide.title.slice(0, 32)}</text>
+        <text x={s(20)} y={s(58)} fontSize={f(7.5)} fill={fgSoft} fontFamily="Inter, sans-serif">{slide.subtitle.slice(0, 55)}</text>
         {/* Three pillar cards */}
         {[0, 1, 2].map(i => (
           <g key={i}>
@@ -1589,10 +1589,10 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
           </g>
         )}
         {/* Left content */}
-        <text x={s(20)} y={s(22)} fontSize={f(6)} fill="#fff" fontFamily="sans-serif" letterSpacing={s(2)}>PRODUCT</text>
-        <text x={s(20)} y={s(50)} fontSize={f(16)} fontWeight="300" fill="#fff" fontFamily="sans-serif">{slide.title.slice(0, 20)}</text>
+        <text x={s(20)} y={s(22)} fontSize={f(6)} fill="#fff" fontFamily="Inter, sans-serif" letterSpacing={s(2)}>PRODUCT</text>
+        <text x={s(20)} y={s(50)} fontSize={f(16)} fontWeight="300" fill="#fff" fontFamily="Inter, sans-serif">{slide.title.slice(0, 20)}</text>
         <rect x={s(20)} y={s(58)} width={s(40)} height={s(2)} rx={s(1)} fill={acc} />
-        <text x={s(20)} y={s(76)} fontSize={f(7)} fill="#fff" fontFamily="sans-serif">{slide.subtitle.slice(0, 35)}</text>
+        <text x={s(20)} y={s(76)} fontSize={f(7)} fill="#fff" fontFamily="Inter, sans-serif">{slide.subtitle.slice(0, 35)}</text>
         {/* Stats */}
         {[0, 1, 2].map(i => (
           <g key={i}>
@@ -1626,10 +1626,10 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
         {/* Top accent line */}
         <rect x={0} y={0} width={s(100)} height={s(3)} fill={pal.accent} />
         {/* Label */}
-        <text x={s(20)} y={s(18)} fontSize={f(5.5)} fill={pal.textSoft} fontFamily="sans-serif" letterSpacing={s(2)}>INITIATIVE</text>
+        <text x={s(20)} y={s(18)} fontSize={f(5.5)} fill={pal.textSoft} fontFamily="Inter, sans-serif" letterSpacing={s(2)}>INITIATIVE</text>
         {/* Title */}
-        <text x={s(20)} y={s(36)} fontSize={f(12)} fontWeight="500" fill={pal.text} fontFamily="sans-serif">{slide.title.slice(0, 35)}</text>
-        <text x={s(20)} y={s(50)} fontSize={f(7)} fill={pal.textSoft} fontFamily="sans-serif">{slide.subtitle.slice(0, 48)}</text>
+        <text x={s(20)} y={s(36)} fontSize={f(12)} fontWeight="500" fill={pal.text} fontFamily="Inter, sans-serif">{slide.title.slice(0, 35)}</text>
+        <text x={s(20)} y={s(50)} fontSize={f(7)} fill={pal.textSoft} fontFamily="Inter, sans-serif">{slide.subtitle.slice(0, 48)}</text>
         {/* Left content: bullet points with colored dots */}
         {[0, 1, 2, 3].map(i => (
           <g key={i}>
@@ -1681,14 +1681,14 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
         <rect x={s(185)} y={s(35)} width={s(60)} height={s(40)} rx={s(4)} fill="rgba(255,255,255,0.05)" />
         {/* Left content */}
         <rect x={s(14)} y={s(14)} width={s(3)} height={s(30)} fill={pal.accent} />
-        <text x={s(24)} y={s(16)} fontSize={f(5.5)} fill={pal.textSoft} fontFamily="sans-serif" letterSpacing={s(1.5)}>USE CASE</text>
-        <text x={s(24)} y={s(36)} fontSize={f(10)} fontWeight="500" fill={pal.text} fontFamily="sans-serif">{slide.title.slice(0, 30)}</text>
-        <text x={s(24)} y={s(50)} fontSize={f(6.5)} fill={pal.textSoft} fontFamily="sans-serif">{slide.subtitle.slice(0, 45)}</text>
+        <text x={s(24)} y={s(16)} fontSize={f(5.5)} fill={pal.textSoft} fontFamily="Inter, sans-serif" letterSpacing={s(1.5)}>USE CASE</text>
+        <text x={s(24)} y={s(36)} fontSize={f(10)} fontWeight="500" fill={pal.text} fontFamily="Inter, sans-serif">{slide.title.slice(0, 30)}</text>
+        <text x={s(24)} y={s(50)} fontSize={f(6.5)} fill={pal.textSoft} fontFamily="Inter, sans-serif">{slide.subtitle.slice(0, 45)}</text>
         {/* Metric boxes */}
         {[0, 1].map(i => (
           <g key={i}>
             <rect x={s(20 + i * 72)} y={s(62)} width={s(65)} height={s(40)} rx={s(3)} fill={pal.panel} />
-            <text x={s(30 + i * 72)} y={s(80)} fontSize={f(14)} fontWeight="600" fill={pal.accent} fontFamily="sans-serif">{["87%", "3.2x", "40%", "24/7"][seed % 4 + i]}</text>
+            <text x={s(30 + i * 72)} y={s(80)} fontSize={f(14)} fontWeight="600" fill={pal.accent} fontFamily="Inter, sans-serif">{["87%", "3.2x", "40%", "24/7"][seed % 4 + i]}</text>
             <rect x={s(30 + i * 72)} y={s(88)} width={s(40)} height={s(2.5)} rx={s(1)} fill={pal.panel} opacity={2} />
           </g>
         ))}
@@ -1710,14 +1710,14 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
         </defs>
         <rect width={width} height={height} fill={`url(#${uid}bg)`} />
         <rect x={0} y={0} width={width} height={s(3)} fill="#00bceb" />
-        <text x={s(20)} y={s(20)} fontSize={f(5.5)} fill="#fff" fontFamily="sans-serif" letterSpacing={s(2)}>USE CASE</text>
-        <text x={s(20)} y={s(42)} fontSize={f(11)} fontWeight="500" fill="#fff" fontFamily="sans-serif">{slide.title.slice(0, 35)}</text>
-        <text x={s(20)} y={s(56)} fontSize={f(6.5)} fill="#fff" fontFamily="sans-serif">{slide.subtitle.slice(0, 48)}</text>
+        <text x={s(20)} y={s(20)} fontSize={f(5.5)} fill="#fff" fontFamily="Inter, sans-serif" letterSpacing={s(2)}>USE CASE</text>
+        <text x={s(20)} y={s(42)} fontSize={f(11)} fontWeight="500" fill="#fff" fontFamily="Inter, sans-serif">{slide.title.slice(0, 35)}</text>
+        <text x={s(20)} y={s(56)} fontSize={f(6.5)} fill="#fff" fontFamily="Inter, sans-serif">{slide.subtitle.slice(0, 48)}</text>
         {/* Ring/donut chart */}
         <circle cx={s(250)} cy={s(90)} r={s(35)} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={s(8)} />
         <circle cx={s(250)} cy={s(90)} r={s(35)} fill="none" stroke="#00bceb" strokeWidth={s(8)} strokeDasharray={`${s(120)} ${s(100)}`} strokeLinecap="round" transform={`rotate(-90 ${s(250)} ${s(90)})`} />
-        <text x={s(250)} y={s(88)} fontSize={f(14)} fontWeight="600" fill="#00bceb" fontFamily="sans-serif" textAnchor="middle">{["72%", "95%", "4.1x", "60%"][(seed) % 4]}</text>
-        <text x={s(250)} y={s(100)} fontSize={f(5)} fill="#fff" fontFamily="sans-serif" textAnchor="middle">IMPROVEMENT</text>
+        <text x={s(250)} y={s(88)} fontSize={f(14)} fontWeight="600" fill="#00bceb" fontFamily="Inter, sans-serif" textAnchor="middle">{["72%", "95%", "4.1x", "60%"][(seed) % 4]}</text>
+        <text x={s(250)} y={s(100)} fontSize={f(5)} fill="#fff" fontFamily="Inter, sans-serif" textAnchor="middle">IMPROVEMENT</text>
         {/* Left bullets */}
         {[0, 1, 2].map(i => (
           <g key={i}>
@@ -1739,9 +1739,9 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
       <svg {...svgProps}>
         <rect width={width} height={height} fill="#fff" />
         <rect x={0} y={0} width={s(8)} height={height} fill={acc} />
-        <text x={s(20)} y={s(18)} fontSize={f(5.5)} fill="#222" fontFamily="sans-serif" letterSpacing={s(1.5)}>USE CASE</text>
-        <text x={s(20)} y={s(38)} fontSize={f(11)} fontWeight="500" fill="#171717" fontFamily="sans-serif">{slide.title.slice(0, 35)}</text>
-        <text x={s(20)} y={s(52)} fontSize={f(6.5)} fill="#222" fontFamily="sans-serif">{slide.subtitle.slice(0, 50)}</text>
+        <text x={s(20)} y={s(18)} fontSize={f(5.5)} fill="#222" fontFamily="Inter, sans-serif" letterSpacing={s(1.5)}>USE CASE</text>
+        <text x={s(20)} y={s(38)} fontSize={f(11)} fontWeight="500" fill="#171717" fontFamily="Inter, sans-serif">{slide.title.slice(0, 35)}</text>
+        <text x={s(20)} y={s(52)} fontSize={f(6.5)} fill="#222" fontFamily="Inter, sans-serif">{slide.subtitle.slice(0, 50)}</text>
         {/* Three icon cards */}
         {[0, 1, 2].map(i => (
           <g key={i}>
@@ -1770,9 +1770,9 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
         </linearGradient>
       </defs>
       <rect width={width} height={height} fill={`url(#${uid}bg)`} />
-      <text x={s(20)} y={s(18)} fontSize={f(5.5)} fill={pal.textSoft} fontFamily="sans-serif" letterSpacing={s(2)}>USE CASE</text>
-      <text x={s(20)} y={s(38)} fontSize={f(11)} fontWeight="500" fill={pal.text} fontFamily="sans-serif">{slide.title.slice(0, 38)}</text>
-      <text x={s(20)} y={s(52)} fontSize={f(6.5)} fill={pal.textSoft} fontFamily="sans-serif">{slide.subtitle.slice(0, 50)}</text>
+      <text x={s(20)} y={s(18)} fontSize={f(5.5)} fill={pal.textSoft} fontFamily="Inter, sans-serif" letterSpacing={s(2)}>USE CASE</text>
+      <text x={s(20)} y={s(38)} fontSize={f(11)} fontWeight="500" fill={pal.text} fontFamily="Inter, sans-serif">{slide.title.slice(0, 38)}</text>
+      <text x={s(20)} y={s(52)} fontSize={f(6.5)} fill={pal.textSoft} fontFamily="Inter, sans-serif">{slide.subtitle.slice(0, 50)}</text>
       {/* Process / timeline */}
       <line x1={s(40)} y1={s(78)} x2={s(280)} y2={s(78)} stroke={pal.accent} strokeWidth={s(1)} opacity={0.3} />
       {[0, 1, 2, 3].map(i => (
@@ -2680,7 +2680,7 @@ export default function App() {
 
   return (
     <div style={{
-      fontFamily: "-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      fontFamily: "'Inter', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif",
       background: C.bg, minHeight: "100vh", color: C.text,
       WebkitFontSmoothing: "antialiased",
       display: "flex",
