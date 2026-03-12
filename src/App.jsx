@@ -2505,25 +2505,33 @@ function StoryDetail({ story, onBack }) {
 }
 
 function StoriesPage() {
-  const [filters, setFilters] = useState({ vertical: "all", products: [], initiatives: [], buyerRoles: [] });
+  const [vertical, setVertical] = useState("all");
+  const [activeFilter, setActiveFilter] = useState(null);
   const [sortBy, setSortBy] = useState("date");
   const [selectedStory, setSelectedStory] = useState(null);
-  const [expandBuyers, setExpandBuyers] = useState(false);
+  const [expandedNodes, setExpandedNodes] = useState({ networking: true, collaboration: true });
 
-  const updateFilter = (key, val) => setFilters(f => {
-    const arr = f[key];
-    return { ...f, [key]: arr.includes(val) ? arr.filter(x => x !== val) : [...arr, val] };
-  });
+  const toggleNode = (key) => setExpandedNodes(prev => ({ ...prev, [key]: !prev[key] }));
 
-  const clearFilters = () => setFilters({ vertical: "all", products: [], initiatives: [], buyerRoles: [] });
+  const isFilterMatch = (filter) => {
+    if (!activeFilter || !filter) return false;
+    return JSON.stringify(activeFilter) === JSON.stringify(filter);
+  };
 
-  const hasFilters = filters.vertical !== "all" || filters.products.length || filters.initiatives.length || filters.buyerRoles.length;
+  const setFilter = (filter) => setActiveFilter(isFilterMatch(filter) ? null : filter);
+
+  // Count stories matching a filter
+  const countFor = (filterFn) => stories.filter(s => {
+    if (vertical !== "all" && s.industry !== vertical) return false;
+    return filterFn(s);
+  }).length;
 
   const filtered = stories.filter(s => {
-    if (filters.vertical !== "all" && s.industry !== filters.vertical) return false;
-    if (filters.products.length && !filters.products.some(p => s.tags.products.includes(p))) return false;
-    if (filters.initiatives.length && !filters.initiatives.some(i => s.tags.initiatives.includes(i))) return false;
-    if (filters.buyerRoles.length && !filters.buyerRoles.some(b => s.tags.buyerRoles.includes(b))) return false;
+    if (vertical !== "all" && s.industry !== vertical) return false;
+    if (!activeFilter) return true;
+    if (activeFilter.type === "product") return s.tags.products.includes(activeFilter.productId);
+    if (activeFilter.type === "initiative") return s.tags.initiatives.includes(activeFilter.initiativeId);
+    if (activeFilter.type === "buyerRole") return s.tags.buyerRoles.includes(activeFilter.roleId);
     return true;
   });
 
@@ -2535,104 +2543,117 @@ function StoriesPage() {
   });
 
   const selectStyle = {
-    fontSize: 13, padding: "8px 28px 8px 12px", border: `1px solid ${C.border}`, borderRadius: 2,
-    background: C.bg, color: C.text, appearance: "none", width: "100%", cursor: "pointer", outline: "none",
+    appearance: "none", WebkitAppearance: "none",
+    background: C.surface, border: `1px solid ${C.border}`, borderRadius: 2,
+    padding: "6px 28px 6px 10px", fontSize: 12, fontWeight: 400, fontFamily: "inherit", color: C.text, cursor: "pointer",
     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' fill='none' stroke-width='1.2'/%3E%3C/svg%3E")`,
     backgroundRepeat: "no-repeat", backgroundPosition: "right 10px center",
   };
 
-  const sectionHead = { fontSize: 10, letterSpacing: 2, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 8 };
+  const treeItemStyle = (depth, isActive) => ({
+    display: "flex", alignItems: "center", gap: 6,
+    padding: `5px 10px 5px ${12 + depth * 14}px`,
+    fontSize: 11, fontWeight: isActive ? 500 : 400, color: isActive ? C.text : C.textSecondary,
+    cursor: "pointer", borderRadius: 2, transition: "background 0.1s",
+    background: isActive ? C.accentSoft : "transparent",
+    whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+  });
 
-  const networkingInits = ["n1", "n2", "n3"];
-  const collabInits = ["c1", "c2", "c3"];
+  const chevron = (expanded) => (
+    <span style={{ fontSize: 8, transition: "transform 0.15s", display: "inline-block", transform: expanded ? "rotate(90deg)" : "rotate(0deg)", color: C.textTertiary, flexShrink: 0 }}>&#9654;</span>
+  );
+
+  const countBadge = (n) => (
+    <span style={{ fontSize: 9, color: C.textTertiary, marginLeft: "auto", flexShrink: 0 }}>{n}</span>
+  );
+
+  const products = fw.products;
+  const verticalOptions = [["all", "All Verticals"], ...Object.entries(verticals).map(([k, v]) => [k, v.label])];
 
   return (
     <div style={{ display: "flex", height: "100%", overflow: "hidden" }}>
-      {/* ── LEFT PANEL: Filters ── */}
-      <div style={{ width: 260, minWidth: 260, borderRight: `1px solid ${C.border}`, overflowY: "auto", padding: "20px 16px" }}>
-        <h2 style={{ fontSize: 18, fontWeight: 400, color: C.text, margin: "0 0 20px" }}>Stories</h2>
-
-        {/* Vertical dropdown */}
-        <div style={{ marginBottom: 20 }}>
-          <p style={sectionHead}>Vertical</p>
-          <select value={filters.vertical} onChange={e => setFilters(f => ({ ...f, vertical: e.target.value }))} style={selectStyle}>
-            <option value="all">All Verticals</option>
-            {Object.entries(tagsDef.verticals).filter(([k]) => k !== "general").map(([k, v]) => (
-              <option key={k} value={k}>{v}</option>
-            ))}
+      {/* ── LEFT PANEL ── */}
+      <div style={{ width: 280, borderRight: `1px solid ${C.border}`, background: C.surface, display: "flex", flexDirection: "column", flexShrink: 0 }}>
+        {/* Header */}
+        <div style={{ padding: "20px 16px 16px", borderBottom: `1px solid ${C.border}` }}>
+          <h2 style={{ fontSize: 15, fontWeight: 500, letterSpacing: "-0.3px", color: C.text, marginBottom: 12 }}>Stories</h2>
+          <select value={vertical} onChange={e => { setVertical(e.target.value); setActiveFilter(null); }} style={{ ...selectStyle, width: "100%" }}>
+            {verticalOptions.map(([k, label]) => <option key={k} value={k}>{label}</option>)}
           </select>
         </div>
 
-        {/* Product pills */}
-        <div style={{ marginBottom: 20 }}>
-          <p style={sectionHead}>Product</p>
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-            {Object.entries(tagsDef.products).map(([k, v]) => (
-              <TagPill key={k} label={v} isActive={filters.products.includes(k)} onClick={() => updateFilter("products", k)} small />
-            ))}
+        {/* Tree navigation */}
+        <div style={{ flex: 1, overflowY: "auto", padding: "8px 0" }}>
+          {/* Products → Initiatives tree */}
+          {products.map(prod => {
+            const PIcon = prod.id === "networking" ? IconNetworking : IconCollaboration;
+            const isExpanded = expandedNodes[prod.id];
+            const prodFilter = { type: "product", productId: prod.id };
+            const prodCount = countFor(s => s.tags.products.includes(prod.id));
+            return (
+              <div key={prod.id}>
+                <div
+                  style={treeItemStyle(0, isFilterMatch(prodFilter))}
+                  onMouseEnter={e => { if (!isFilterMatch(prodFilter)) e.currentTarget.style.background = C.accentSoft; }}
+                  onMouseLeave={e => { if (!isFilterMatch(prodFilter)) e.currentTarget.style.background = isFilterMatch(prodFilter) ? C.accentSoft : "transparent"; }}
+                >
+                  <span onClick={() => toggleNode(prod.id)}>{chevron(isExpanded)}</span>
+                  <span onClick={() => setFilter(prodFilter)} style={{ display: "flex", alignItems: "center", gap: 6, flex: 1, overflow: "hidden" }}>
+                    <PIcon size={12} /> {prod.name}
+                  </span>
+                  {countBadge(prodCount)}
+                </div>
+                {isExpanded && prod.initiatives.map(init => {
+                  const initFilter = { type: "initiative", initiativeId: init.id };
+                  const initCount = countFor(s => s.tags.initiatives.includes(init.id));
+                  return (
+                    <div
+                      key={init.id}
+                      onClick={() => setFilter(initFilter)}
+                      style={treeItemStyle(1, isFilterMatch(initFilter))}
+                      onMouseEnter={e => { if (!isFilterMatch(initFilter)) e.currentTarget.style.background = C.accentSoft; }}
+                      onMouseLeave={e => { if (!isFilterMatch(initFilter)) e.currentTarget.style.background = isFilterMatch(initFilter) ? C.accentSoft : "transparent"; }}
+                    >
+                      <IconInitiative size={10} />
+                      <span style={{ overflow: "hidden", textOverflow: "ellipsis", flex: 1 }}>{init.name}</span>
+                      {countBadge(initCount)}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+
+          {/* Divider */}
+          <div style={{ height: 1, background: C.borderLight, margin: "8px 16px" }} />
+
+          {/* Sort */}
+          <div style={{ padding: "4px 16px 8px" }}>
+            <div style={{ fontSize: 9, letterSpacing: 1.5, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 6 }}>Sort By</div>
+            <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{ ...selectStyle, width: "100%" }}>
+              <option value="date">Most Recent</option>
+              <option value="industry">Industry</option>
+              <option value="product">Product</option>
+            </select>
           </div>
-        </div>
 
-        {/* Initiative checkboxes */}
-        <div style={{ marginBottom: 20 }}>
-          <p style={sectionHead}>Initiatives</p>
-          <div style={{ fontSize: 9, letterSpacing: 1, color: C.textTertiary, textTransform: "uppercase", marginBottom: 6 }}>Networking</div>
-          {networkingInits.map(k => (
-            <label key={k} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: C.textSecondary, padding: "3px 0", cursor: "pointer" }}>
-              <input type="checkbox" checked={filters.initiatives.includes(k)} onChange={() => updateFilter("initiatives", k)}
-                style={{ accentColor: C.text, width: 13, height: 13 }} />
-              {tagsDef.initiatives[k]}
-            </label>
-          ))}
-          <div style={{ fontSize: 9, letterSpacing: 1, color: C.textTertiary, textTransform: "uppercase", marginTop: 10, marginBottom: 6 }}>Collaboration</div>
-          {collabInits.map(k => (
-            <label key={k} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: C.textSecondary, padding: "3px 0", cursor: "pointer" }}>
-              <input type="checkbox" checked={filters.initiatives.includes(k)} onChange={() => updateFilter("initiatives", k)}
-                style={{ accentColor: C.text, width: 13, height: 13 }} />
-              {tagsDef.initiatives[k]}
-            </label>
-          ))}
-        </div>
-
-        {/* Buyer roles */}
-        <div style={{ marginBottom: 20 }}>
-          <p style={{ ...sectionHead, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }} onClick={() => setExpandBuyers(v => !v)}>
-            Buyer Roles <span style={{ fontSize: 8 }}>{expandBuyers ? "▲" : "▼"}</span>
-          </p>
-          {expandBuyers && Object.entries(tagsDef.buyerRoles).map(([k, v]) => (
-            <label key={k} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: C.textSecondary, padding: "3px 0", cursor: "pointer" }}>
-              <input type="checkbox" checked={filters.buyerRoles.includes(k)} onChange={() => updateFilter("buyerRoles", k)}
-                style={{ accentColor: C.text, width: 13, height: 13 }} />
-              {v}
-            </label>
-          ))}
-        </div>
-
-        {/* Sort */}
-        <div style={{ marginBottom: 20 }}>
-          <p style={sectionHead}>Sort By</p>
-          <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={selectStyle}>
-            <option value="date">Most Recent</option>
-            <option value="industry">Industry</option>
-            <option value="product">Product</option>
-          </select>
-        </div>
-
-        {/* Active filters */}
-        {hasFilters && (
-          <div style={{ borderTop: `1px solid ${C.borderLight}`, paddingTop: 12 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-              <span style={{ fontSize: 10, color: C.textTertiary, letterSpacing: 1, textTransform: "uppercase" }}>Active Filters</span>
-              <span onClick={clearFilters} style={{ fontSize: 11, color: C.textTertiary, cursor: "pointer", textDecoration: "underline" }}>Clear all</span>
+          {/* Clear filter link */}
+          {activeFilter && (
+            <div
+              onClick={() => setActiveFilter(null)}
+              style={{ ...treeItemStyle(0, false), marginTop: 4, fontSize: 10, color: C.textTertiary, justifyContent: "center" }}
+              onMouseEnter={e => e.currentTarget.style.background = C.accentSoft}
+              onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+            >
+              Show all stories
             </div>
-            <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
-              {filters.vertical !== "all" && <TagPill label={tagsDef.verticals[filters.vertical]} isActive onClick={() => setFilters(f => ({ ...f, vertical: "all" }))} small />}
-              {filters.products.map(p => <TagPill key={p} label={tagsDef.products[p]} isActive onClick={() => updateFilter("products", p)} small />)}
-              {filters.initiatives.map(i => <TagPill key={i} label={tagsDef.initiatives[i]} isActive onClick={() => updateFilter("initiatives", i)} small />)}
-              {filters.buyerRoles.map(b => <TagPill key={b} label={tagsDef.buyerRoles[b]} isActive onClick={() => updateFilter("buyerRoles", b)} small />)}
-            </div>
-          </div>
-        )}
+          )}
+        </div>
+
+        {/* Summary footer */}
+        <div style={{ padding: "12px 16px", borderTop: `1px solid ${C.border}`, fontSize: 11, color: C.textTertiary }}>
+          {sorted.length} stor{sorted.length === 1 ? "y" : "ies"} · {stories.length} total
+        </div>
       </div>
 
       {/* ── RIGHT PANEL ── */}
@@ -2641,11 +2662,8 @@ function StoriesPage() {
           <StoryDetail story={selectedStory} onBack={() => setSelectedStory(null)} />
         ) : (
           <div style={{ padding: "24px 32px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-              <span style={{ fontSize: 13, color: C.textTertiary }}>{sorted.length} stor{sorted.length === 1 ? "y" : "ies"}</span>
-            </div>
             {sorted.length === 0 ? (
-              <div style={{ textAlign: "center", padding: "80px 0", color: C.textTertiary, fontSize: 13 }}>No stories match the current filters.</div>
+              <div style={{ textAlign: "center", padding: "80px 0", color: C.textTertiary, fontSize: 13 }}>No stories match the current filter.</div>
             ) : (
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 16 }}>
                 {sorted.map(s => <StoryCard key={s.id} story={s} onClick={() => setSelectedStory(s)} />)}
