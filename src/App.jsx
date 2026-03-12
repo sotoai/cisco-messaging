@@ -679,7 +679,7 @@ function MessagingPage() {
         <p style={{ fontSize: 12, color: C.textTertiary, fontWeight: 300, lineHeight: 1.6 }}>
           Company &rarr; Solution Category &rarr; Product &times;2 &rarr; Initiative &times;3 &rarr; Use Case &times;3
         </p>
-        <CiscoLogo width={48} style={{ filter: C.logoFilter }} />
+        <CiscoLogo width={72} style={{ filter: C.logoFilter }} />
       </div>
     </PageShell>
   );
@@ -921,7 +921,7 @@ function BuyersPage() {
         <p style={{ fontSize: 12, color: C.textTertiary, fontWeight: 300, lineHeight: 1.6 }}>
           Enterprise Leadership &rarr; Workplace Decision Makers &rarr; Product Buyers &times;2 &rarr; Persona &times;3
         </p>
-        <CiscoLogo width={48} style={{ filter: C.logoFilter }} />
+        <CiscoLogo width={72} style={{ filter: C.logoFilter }} />
       </div>
     </PageShell>
   );
@@ -989,7 +989,7 @@ export default function App() {
         overflow: "auto",
       }}>
         <div style={{ marginBottom: 24 }}>
-          <CiscoLogo width={36} style={{ filter: C.logoFilter }} />
+          <CiscoLogo width={56} style={{ filter: C.logoFilter }} />
         </div>
 
         <div style={{ flex: 1, width: "100%" }}>
