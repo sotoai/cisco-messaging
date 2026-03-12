@@ -1318,185 +1318,339 @@ function BuyersPage() {
 
 const TYPE_LABELS = { company: "Company", solution: "Solution", product: "Product", initiative: "Initiative", useCase: "Use Case" };
 
-// ── Slide visual templates (SVG-based, render at any scale) ──
+// ── Slide visual templates (rich, colorful, presentation-like) ──
 function SlidePreview({ slide, width = 320, height = 180 }) {
   const seed = slide.id.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
-  const hue = (seed * 37) % 360;
-  const accent = `hsl(${hue}, 8%, 72%)`;
-  const accentSoft = `hsl(${hue}, 6%, 94%)`;
-  const darkAccent = `hsl(${hue}, 8%, 28%)`;
-  const isDark = C.bg !== "#ffffff";
-  const bg = isDark ? "#1a1a1a" : "#ffffff";
-  const fg = isDark ? "#e5e5e5" : "#171717";
-  const fgSoft = isDark ? "#737373" : "#a3a3a3";
-  const fgMid = isDark ? "#a3a3a3" : "#737373";
-  const border = isDark ? "#333" : "#e5e5e5";
-  const surface = isDark ? "#222" : "#f5f5f5";
+  const s = (v) => v * width / 320;
+  const uid = `g${slide.id.replace(/[^a-z0-9]/gi, "")}`;
   const ciscoBridge = "M8.5 2.5C6 5 4.5 6.5 3 9.5c1.5-1.5 3-2.5 5.5-2.5s4 1 5.5 2.5C12.5 6.5 11 5 8.5 2.5z";
 
-  const s = (v) => v * width / 320; // scale helper
+  // Cisco brand palette with seeded variation
+  const palettes = [
+    { bg1: "#049fd9", bg2: "#036a91", accent: "#00bceb", text: "#fff", textSoft: "rgba(255,255,255,0.7)", panel: "rgba(255,255,255,0.12)", panelSolid: "#0589b8" },
+    { bg1: "#1a1a2e", bg2: "#16213e", accent: "#0096d6", text: "#fff", textSoft: "rgba(255,255,255,0.6)", panel: "rgba(0,150,214,0.15)", panelSolid: "#1b2a4a" },
+    { bg1: "#0d274d", bg2: "#041c32", accent: "#00bceb", text: "#fff", textSoft: "rgba(255,255,255,0.65)", panel: "rgba(0,188,235,0.12)", panelSolid: "#0a3260" },
+    { bg1: "#ffffff", bg2: "#f0f4f8", accent: "#0096d6", text: "#171717", textSoft: "#737373", panel: "#e8f4fa", panelSolid: "#dceef7" },
+    { bg1: "#fbfbfb", bg2: "#f5f5f5", accent: "#049fd9", text: "#171717", textSoft: "#737373", panel: "#eaf6fb", panelSolid: "#d4edf7" },
+    { bg1: "#0b3d2e", bg2: "#072a1f", accent: "#6cc04a", text: "#fff", textSoft: "rgba(255,255,255,0.65)", panel: "rgba(108,192,74,0.12)", panelSolid: "#0d4a37" },
+    { bg1: "#2d1b4e", bg2: "#1a0f30", accent: "#9b59b6", text: "#fff", textSoft: "rgba(255,255,255,0.6)", panel: "rgba(155,89,182,0.15)", panelSolid: "#3a2460" },
+  ];
+  const pIdx = seed % palettes.length;
+  const p = palettes[pIdx];
+  // Alternate layout variant per seed
+  const variant = seed % 3;
 
   if (slide.type === "company") {
     return (
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
-        <rect width={width} height={height} fill={bg} />
-        {/* Large accent band at top */}
-        <rect x={0} y={0} width={width} height={s(6)} fill={isDark ? darkAccent : accent} />
-        {/* Decorative geometric shapes */}
-        <rect x={s(200)} y={s(30)} width={s(90)} height={s(90)} rx={s(2)} fill={surface} />
-        <rect x={s(210)} y={s(40)} width={s(70)} height={s(70)} rx={s(45)} fill="none" stroke={border} strokeWidth={s(1)} />
-        <circle cx={s(245)} cy={s(75)} r={s(20)} fill="none" stroke={accent} strokeWidth={s(1.5)} />
-        {/* Cisco bridge icon */}
-        <g transform={`translate(${s(235)}, ${s(65)}) scale(${s(1.2)})`}>
-          <path d={ciscoBridge} fill={accent} />
+        <defs>
+          <linearGradient id={`${uid}bg`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#049fd9" /><stop offset="100%" stopColor="#003b5c" />
+          </linearGradient>
+        </defs>
+        <rect width={width} height={height} fill={`url(#${uid}bg)`} />
+        {/* Large abstract shapes */}
+        <circle cx={width * 0.82} cy={height * 0.35} r={s(65)} fill="rgba(255,255,255,0.06)" />
+        <circle cx={width * 0.75} cy={height * 0.5} r={s(40)} fill="rgba(255,255,255,0.04)" />
+        <rect x={0} y={height - s(4)} width={width} height={s(4)} fill="#00bceb" />
+        {/* Cisco logo area */}
+        <g transform={`translate(${s(24)}, ${s(18)}) scale(${s(1.8)})`}>
+          <path d={ciscoBridge} fill="rgba(255,255,255,0.9)" />
         </g>
-        {/* Title text */}
-        <text x={s(24)} y={s(55)} fontSize={s(18)} fontWeight="300" fill={fg} fontFamily="sans-serif">{slide.title}</text>
-        {/* Subtitle */}
-        <text x={s(24)} y={s(78)} fontSize={s(9)} fill={fgMid} fontFamily="sans-serif">{slide.subtitle.slice(0, 50)}</text>
-        {/* Bottom bar with type label */}
-        <rect x={0} y={height - s(24)} width={width} height={s(24)} fill={surface} />
-        <text x={s(24)} y={height - s(9)} fontSize={s(7)} fill={fgSoft} fontFamily="sans-serif" letterSpacing={s(1.5)} textTransform="uppercase">COMPANY OVERVIEW</text>
-        {/* Cisco logo bottom right */}
-        <g transform={`translate(${width - s(48)}, ${height - s(18)}) scale(${s(0.6)})`}>
-          <path d={ciscoBridge} fill={fgSoft} />
-        </g>
+        <text x={s(24)} y={s(52)} fontSize={s(7)} fill="rgba(255,255,255,0.5)" fontFamily="sans-serif" letterSpacing={s(2)}>CISCO</text>
+        {/* Main title */}
+        <text x={s(24)} y={s(88)} fontSize={s(22)} fontWeight="300" fill="#fff" fontFamily="sans-serif">{slide.title}</text>
+        <text x={s(24)} y={s(108)} fontSize={s(9)} fill="rgba(255,255,255,0.7)" fontFamily="sans-serif">{slide.subtitle.slice(0, 50)}</text>
+        {/* Decorative line */}
+        <rect x={s(24)} y={s(118)} width={s(50)} height={s(2)} rx={s(1)} fill="#00bceb" />
+        {/* Bottom bar */}
+        <rect x={0} y={height - s(22)} width={width} height={s(18)} fill="rgba(0,0,0,0.2)" />
+        <text x={s(24)} y={height - s(9)} fontSize={s(6)} fill="rgba(255,255,255,0.5)" fontFamily="sans-serif" letterSpacing={s(1.5)}>CORPORATE MESSAGING FRAMEWORK</text>
       </svg>
     );
   }
 
   if (slide.type === "solution") {
+    // Alternate between dark and light solution slides
+    const isDarkSlide = variant !== 2;
+    const bg = isDarkSlide ? "#0d274d" : "#ffffff";
+    const fg = isDarkSlide ? "#fff" : "#171717";
+    const fgSoft = isDarkSlide ? "rgba(255,255,255,0.6)" : "#737373";
+    const acc = "#00bceb";
+    const pillarColors = ["#049fd9", "#6cc04a", "#f5a623"];
     return (
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
-        <rect width={width} height={height} fill={bg} />
-        {/* Left accent stripe */}
-        <rect x={0} y={0} width={s(4)} height={height} fill={isDark ? darkAccent : accent} />
-        {/* Section label */}
-        <text x={s(20)} y={s(22)} fontSize={s(7)} fill={fgSoft} fontFamily="sans-serif" letterSpacing={s(1.5)}>SOLUTION CATEGORY</text>
+        <defs>
+          <linearGradient id={`${uid}bg`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor={isDarkSlide ? "#0d274d" : "#f8fbff"} />
+            <stop offset="100%" stopColor={isDarkSlide ? "#041c32" : "#eef5fb"} />
+          </linearGradient>
+        </defs>
+        <rect width={width} height={height} fill={`url(#${uid}bg)`} />
+        {/* Top accent */}
+        <rect x={0} y={0} width={width} height={s(3)} fill={acc} />
+        {/* Label */}
+        <text x={s(20)} y={s(20)} fontSize={s(6)} fill={fgSoft} fontFamily="sans-serif" letterSpacing={s(2)}>SOLUTION CATEGORY</text>
         {/* Title */}
-        <text x={s(20)} y={s(48)} fontSize={s(14)} fontWeight="300" fill={fg} fontFamily="sans-serif">{slide.title.slice(0, 35)}</text>
-        {/* Subtitle */}
-        <text x={s(20)} y={s(66)} fontSize={s(8)} fill={fgMid} fontFamily="sans-serif">{slide.subtitle.slice(0, 55)}</text>
-        {/* Three pillar boxes */}
+        <text x={s(20)} y={s(42)} fontSize={s(15)} fontWeight="300" fill={fg} fontFamily="sans-serif">{slide.title.slice(0, 32)}</text>
+        <text x={s(20)} y={s(58)} fontSize={s(7.5)} fill={fgSoft} fontFamily="sans-serif">{slide.subtitle.slice(0, 55)}</text>
+        {/* Three pillar cards */}
         {[0, 1, 2].map(i => (
           <g key={i}>
-            <rect x={s(20 + i * 95)} y={s(85)} width={s(85)} height={s(45)} rx={s(2)} fill={surface} stroke={border} strokeWidth={s(0.5)} />
-            <rect x={s(20 + i * 95)} y={s(85)} width={s(85)} height={s(3)} rx={s(1)} fill={accent} />
-            <line x1={s(32 + i * 95)} y1={s(100)} x2={s(80 + i * 95)} y2={s(100)} stroke={border} strokeWidth={s(1)} />
-            <line x1={s(32 + i * 95)} y1={s(110)} x2={s(70 + i * 95)} y2={s(110)} stroke={border} strokeWidth={s(1)} />
-            <line x1={s(32 + i * 95)} y1={s(120)} x2={s(60 + i * 95)} y2={s(120)} stroke={border} strokeWidth={s(1)} />
+            <rect x={s(20 + i * 97)} y={s(72)} width={s(88)} height={s(72)} rx={s(3)} fill={isDarkSlide ? "rgba(255,255,255,0.06)" : "#f5f8fb"} />
+            <rect x={s(20 + i * 97)} y={s(72)} width={s(88)} height={s(4)} rx={s(2)} fill={pillarColors[i]} />
+            <circle cx={s(42 + i * 97)} cy={s(92)} r={s(6)} fill={pillarColors[i]} opacity={0.2} />
+            <circle cx={s(42 + i * 97)} cy={s(92)} r={s(3)} fill={pillarColors[i]} />
+            <rect x={s(54 + i * 97)} y={s(88)} width={s(42)} height={s(3)} rx={s(1.5)} fill={isDarkSlide ? "rgba(255,255,255,0.2)" : "#d0d8e0"} />
+            <rect x={s(54 + i * 97)} y={s(96)} width={s(30)} height={s(3)} rx={s(1.5)} fill={isDarkSlide ? "rgba(255,255,255,0.12)" : "#dfe5eb"} />
+            {[0, 1, 2].map(j => (
+              <rect key={j} x={s(30 + i * 97)} y={s(110 + j * 10)} width={s(65 - j * 10)} height={s(2.5)} rx={s(1)} fill={isDarkSlide ? "rgba(255,255,255,0.1)" : "#e5eaef"} />
+            ))}
           </g>
         ))}
         {/* Bottom */}
-        <rect x={0} y={height - s(24)} width={width} height={s(24)} fill={surface} />
-        <g transform={`translate(${width - s(48)}, ${height - s(18)}) scale(${s(0.6)})`}><path d={ciscoBridge} fill={fgSoft} /></g>
+        <rect x={0} y={height - s(3)} width={width} height={s(3)} fill={acc} opacity={0.5} />
+        <g transform={`translate(${width - s(42)}, ${s(12)}) scale(${s(0.6)})`}><path d={ciscoBridge} fill={fgSoft} /></g>
       </svg>
     );
   }
 
   if (slide.type === "product") {
     const isNet = slide.productId === "networking";
+    const gradA = isNet ? "#036a91" : "#1a1a2e";
+    const gradB = isNet ? "#049fd9" : "#2d1b69";
+    const acc = isNet ? "#00bceb" : "#9b59b6";
     return (
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
-        <rect width={width} height={height} fill={bg} />
-        {/* Top band */}
-        <rect x={0} y={0} width={width} height={s(3)} fill={isDark ? darkAccent : accent} />
-        {/* Product icon area */}
-        <rect x={s(20)} y={s(18)} width={s(36)} height={s(36)} rx={s(18)} fill={surface} stroke={border} strokeWidth={s(0.5)} />
+        <defs>
+          <linearGradient id={`${uid}bg`} x1="0" y1="0" x2="1" y2="0.8">
+            <stop offset="0%" stopColor={gradA} /><stop offset="100%" stopColor={gradB} />
+          </linearGradient>
+        </defs>
+        <rect width={width} height={height} fill={`url(#${uid}bg)`} />
+        {/* Large photo-like area */}
+        <rect x={width * 0.52} y={0} width={width * 0.48} height={height} fill="rgba(0,0,0,0.15)" />
+        <rect x={width * 0.52} y={0} width={width * 0.48} height={height} fill="rgba(255,255,255,0.03)" />
+        {/* Simulated image: abstract network/office shapes */}
         {isNet ? (
-          <g transform={`translate(${s(30)}, ${s(28)}) scale(${s(0.65)})`}>
-            <rect x="2" y="6" width="20" height="12" rx="1" fill="none" stroke={fgMid} strokeWidth="1.5" />
-            <line x1="6" y1="10" x2="6" y2="14" stroke={fgMid} strokeWidth="1.5" />
-            <line x1="12" y1="10" x2="12" y2="14" stroke={fgMid} strokeWidth="1.5" />
-            <line x1="18" y1="10" x2="18" y2="14" stroke={fgMid} strokeWidth="1.5" />
+          <g>
+            {[0,1,2,3,4].map(i => <circle key={i} cx={s(220 + (i * 17) % 70)} cy={s(40 + (i * 29) % 100)} r={s(3 + i * 1.5)} fill={acc} opacity={0.15 + i * 0.08} />)}
+            {[0,1,2].map(i => <line key={`l${i}`} x1={s(200 + i * 20)} y1={s(50 + i * 30)} x2={s(240 + i * 15)} y2={s(70 + i * 20)} stroke={acc} strokeWidth={s(0.5)} opacity={0.3} />)}
+            <rect x={s(195)} y={s(55)} width={s(70)} height={s(45)} rx={s(4)} fill="rgba(255,255,255,0.06)" stroke={acc} strokeWidth={s(0.5)} opacity={0.5} />
           </g>
         ) : (
-          <g transform={`translate(${s(30)}, ${s(28)}) scale(${s(0.65)})`}>
-            <circle cx="12" cy="12" r="10" fill="none" stroke={fgMid} strokeWidth="1.5" />
-            <path d="M8 12a4 4 0 0 1 8 0" fill="none" stroke={fgMid} strokeWidth="1.5" />
+          <g>
+            {[0,1,2,3].map(i => <rect key={i} x={s(200 + (i * 13) % 50)} y={s(30 + i * 25)} width={s(35)} height={s(22)} rx={s(3)} fill="rgba(255,255,255,0.06)" stroke={acc} strokeWidth={s(0.5)} opacity={0.4} />)}
+            <circle cx={s(240)} cy={s(90)} r={s(25)} fill="rgba(255,255,255,0.04)" stroke={acc} strokeWidth={s(0.8)} opacity={0.3} />
           </g>
         )}
-        {/* Title */}
-        <text x={s(66)} y={s(34)} fontSize={s(13)} fontWeight="400" fill={fg} fontFamily="sans-serif">{slide.title}</text>
-        <text x={s(66)} y={s(48)} fontSize={s(7.5)} fill={fgMid} fontFamily="sans-serif">{slide.subtitle.slice(0, 45)}</text>
-        {/* Stats row */}
+        {/* Left content */}
+        <text x={s(20)} y={s(22)} fontSize={s(6)} fill="rgba(255,255,255,0.5)" fontFamily="sans-serif" letterSpacing={s(2)}>PRODUCT</text>
+        <text x={s(20)} y={s(50)} fontSize={s(16)} fontWeight="300" fill="#fff" fontFamily="sans-serif">{slide.title.slice(0, 20)}</text>
+        <rect x={s(20)} y={s(58)} width={s(40)} height={s(2)} rx={s(1)} fill={acc} />
+        <text x={s(20)} y={s(76)} fontSize={s(7)} fill="rgba(255,255,255,0.65)" fontFamily="sans-serif">{slide.subtitle.slice(0, 35)}</text>
+        {/* Stats */}
         {[0, 1, 2].map(i => (
           <g key={i}>
-            <rect x={s(20 + i * 95)} y={s(68)} width={s(85)} height={s(55)} rx={s(2)} fill={surface} />
-            <rect x={s(38 + i * 95)} y={s(80)} width={s(50)} height={s(4)} rx={s(2)} fill={border} />
-            <rect x={s(38 + i * 95)} y={s(90)} width={s(35)} height={s(3)} rx={s(1.5)} fill={border} />
-            <circle cx={s(30 + i * 95)} cy={s(87)} r={s(4)} fill={accent} opacity={0.5} />
-            <rect x={s(28 + i * 95)} y={s(102)} width={s(65)} height={s(3)} rx={s(1.5)} fill={border} opacity={0.5} />
-            <rect x={s(28 + i * 95)} y={s(109)} width={s(45)} height={s(3)} rx={s(1.5)} fill={border} opacity={0.5} />
+            <rect x={s(20)} y={s(92 + i * 22)} width={s(130)} height={s(18)} rx={s(2)} fill="rgba(255,255,255,0.07)" />
+            <circle cx={s(32)} cy={s(101 + i * 22)} r={s(4)} fill={acc} opacity={0.6} />
+            <rect x={s(42)} y={s(98 + i * 22)} width={s(55 + (seed * (i+1)) % 30)} height={s(2.5)} rx={s(1)} fill="rgba(255,255,255,0.25)" />
+            <rect x={s(42)} y={s(104 + i * 22)} width={s(35 + (seed * (i+2)) % 20)} height={s(2)} rx={s(1)} fill="rgba(255,255,255,0.12)" />
           </g>
         ))}
-        {/* Bottom */}
-        <rect x={0} y={height - s(22)} width={width} height={s(22)} fill={surface} />
-        <text x={s(20)} y={height - s(8)} fontSize={s(6.5)} fill={fgSoft} fontFamily="sans-serif" letterSpacing={s(1)}>PRODUCT OVERVIEW</text>
-        <g transform={`translate(${width - s(48)}, ${height - s(16)}) scale(${s(0.6)})`}><path d={ciscoBridge} fill={fgSoft} /></g>
+        {/* Bottom branding bar */}
+        <rect x={0} y={height - s(18)} width={width} height={s(18)} fill="rgba(0,0,0,0.3)" />
+        <g transform={`translate(${s(16)}, ${height - s(14)}) scale(${s(0.5)})`}><path d={ciscoBridge} fill="rgba(255,255,255,0.5)" /></g>
+        <rect x={0} y={height - s(2)} width={width} height={s(2)} fill={acc} />
       </svg>
     );
   }
 
   if (slide.type === "initiative") {
-    const barCount = 4;
-    const barHeights = Array.from({ length: barCount }, (_, i) => s(15 + ((seed * (i + 3) * 7) % 35)));
+    const pal = palettes[pIdx];
+    const isDarkSlide = !pal.bg1.startsWith("#f");
+    const barCount = 5;
+    const barH = Array.from({ length: barCount }, (_, i) => s(12 + ((seed * (i + 3) * 7) % 38)));
     return (
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
-        <rect width={width} height={height} fill={bg} />
-        {/* Top colored band */}
-        <rect x={0} y={0} width={s(120)} height={s(3)} fill={isDark ? darkAccent : accent} />
-        {/* Section label */}
-        <text x={s(20)} y={s(20)} fontSize={s(6.5)} fill={fgSoft} fontFamily="sans-serif" letterSpacing={s(1.5)}>INITIATIVE</text>
+        <defs>
+          <linearGradient id={`${uid}bg`} x1="0" y1="0" x2="0.3" y2="1">
+            <stop offset="0%" stopColor={pal.bg1} /><stop offset="100%" stopColor={pal.bg2} />
+          </linearGradient>
+        </defs>
+        <rect width={width} height={height} fill={`url(#${uid}bg)`} />
+        {/* Top accent line */}
+        <rect x={0} y={0} width={s(100)} height={s(3)} fill={pal.accent} />
+        {/* Label */}
+        <text x={s(20)} y={s(18)} fontSize={s(5.5)} fill={pal.textSoft} fontFamily="sans-serif" letterSpacing={s(2)}>INITIATIVE</text>
         {/* Title */}
-        <text x={s(20)} y={s(38)} fontSize={s(11)} fontWeight="500" fill={fg} fontFamily="sans-serif">{slide.title.slice(0, 40)}</text>
-        <text x={s(20)} y={s(52)} fontSize={s(7.5)} fill={fgMid} fontFamily="sans-serif">{slide.subtitle.slice(0, 50)}</text>
-        {/* Content area: left = text lines, right = mini bar chart */}
-        {[0, 1, 2, 3, 4].map(i => (
+        <text x={s(20)} y={s(36)} fontSize={s(12)} fontWeight="500" fill={pal.text} fontFamily="sans-serif">{slide.title.slice(0, 35)}</text>
+        <text x={s(20)} y={s(50)} fontSize={s(7)} fill={pal.textSoft} fontFamily="sans-serif">{slide.subtitle.slice(0, 48)}</text>
+        {/* Left content: bullet points with colored dots */}
+        {[0, 1, 2, 3].map(i => (
           <g key={i}>
-            <circle cx={s(28)} cy={s(72 + i * 14)} r={s(2)} fill={accent} />
-            <rect x={s(36)} y={s(70 + i * 14)} width={s(80 + (seed * (i + 1)) % 40)} height={s(3)} rx={s(1.5)} fill={border} />
+            <circle cx={s(26)} cy={s(68 + i * 16)} r={s(2.5)} fill={pal.accent} opacity={0.8 - i * 0.15} />
+            <rect x={s(34)} y={s(66 + i * 16)} width={s(70 + (seed * (i + 1)) % 40)} height={s(3)} rx={s(1.5)} fill={pal.panel} />
+            <rect x={s(34)} y={s(72 + i * 16)} width={s(45 + (seed * (i + 2)) % 30)} height={s(2)} rx={s(1)} fill={pal.panel} opacity={0.6} />
           </g>
         ))}
-        {/* Mini bar chart right side */}
-        {barHeights.map((h, i) => (
-          <rect key={i} x={s(210 + i * 22)} y={s(135) - h} width={s(16)} height={h} rx={s(1)} fill={i === barCount - 1 ? accent : surface} stroke={border} strokeWidth={s(0.5)} />
+        {/* Right: bar chart */}
+        <rect x={s(180)} y={s(58)} width={s(120)} height={s(88)} rx={s(3)} fill={pal.panel} />
+        {barH.map((h, i) => (
+          <g key={i}>
+            <rect x={s(194 + i * 20)} y={s(130) - h} width={s(14)} height={h} rx={s(1.5)} fill={pal.accent} opacity={0.3 + (i === barCount - 1 ? 0.5 : i * 0.08)} />
+          </g>
         ))}
-        <line x1={s(206)} y1={s(136)} x2={s(300)} y2={s(136)} stroke={border} strokeWidth={s(0.5)} />
+        <line x1={s(190)} y1={s(132)} x2={s(292)} y2={s(132)} stroke={pal.textSoft} strokeWidth={s(0.5)} opacity={0.3} />
+        {/* Y-axis labels */}
+        {[0, 1, 2].map(i => (
+          <rect key={i} x={s(183)} y={s(80 + i * 18)} width={s(4)} height={s(1.5)} fill={pal.textSoft} opacity={0.3} />
+        ))}
         {/* Bottom */}
-        <rect x={0} y={height - s(20)} width={width} height={s(20)} fill={surface} />
-        <g transform={`translate(${width - s(44)}, ${height - s(15)}) scale(${s(0.55)})`}><path d={ciscoBridge} fill={fgSoft} /></g>
+        <rect x={0} y={height - s(16)} width={width} height={s(16)} fill={isDarkSlide ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.04)"} />
+        <g transform={`translate(${width - s(40)}, ${height - s(12)}) scale(${s(0.45)})`}><path d={ciscoBridge} fill={pal.textSoft} /></g>
+        <rect x={0} y={height - s(2)} width={s(100)} height={s(2)} fill={pal.accent} opacity={0.6} />
       </svg>
     );
   }
 
-  // useCase — detail slide
-  const lineWidths = Array.from({ length: 6 }, (_, i) => s(60 + ((seed * (i + 2) * 11) % 80)));
+  // ── useCase slides: multiple visual layouts ──
+  const pal = palettes[(pIdx + 2) % palettes.length];
+  const isDarkSlide = !pal.bg1.startsWith("#f");
+  const layout = seed % 4;
+
+  if (layout === 0) {
+    // Split layout: left text, right "photo" area with gradient
+    return (
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
+        <rect width={width} height={height} fill={pal.bg1} />
+        {/* Right photo area */}
+        <defs>
+          <linearGradient id={`${uid}ph`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor={pal.accent} stopOpacity="0.3" /><stop offset="100%" stopColor={pal.bg2} stopOpacity="0.8" />
+          </linearGradient>
+        </defs>
+        <rect x={width * 0.55} y={0} width={width * 0.45} height={height} fill={`url(#${uid}ph)`} />
+        {/* Abstract photo shapes */}
+        <circle cx={width * 0.72} cy={height * 0.4} r={s(30)} fill="rgba(255,255,255,0.06)" />
+        <circle cx={width * 0.8} cy={height * 0.6} r={s(20)} fill="rgba(255,255,255,0.04)" />
+        <rect x={s(185)} y={s(35)} width={s(60)} height={s(40)} rx={s(4)} fill="rgba(255,255,255,0.05)" />
+        {/* Left content */}
+        <rect x={s(14)} y={s(14)} width={s(3)} height={s(30)} fill={pal.accent} />
+        <text x={s(24)} y={s(16)} fontSize={s(5.5)} fill={pal.textSoft} fontFamily="sans-serif" letterSpacing={s(1.5)}>USE CASE</text>
+        <text x={s(24)} y={s(36)} fontSize={s(10)} fontWeight="500" fill={pal.text} fontFamily="sans-serif">{slide.title.slice(0, 30)}</text>
+        <text x={s(24)} y={s(50)} fontSize={s(6.5)} fill={pal.textSoft} fontFamily="sans-serif">{slide.subtitle.slice(0, 45)}</text>
+        {/* Metric boxes */}
+        {[0, 1].map(i => (
+          <g key={i}>
+            <rect x={s(20 + i * 72)} y={s(62)} width={s(65)} height={s(40)} rx={s(3)} fill={pal.panel} />
+            <text x={s(30 + i * 72)} y={s(80)} fontSize={s(14)} fontWeight="600" fill={pal.accent} fontFamily="sans-serif">{["87%", "3.2x", "40%", "24/7"][seed % 4 + i]}</text>
+            <rect x={s(30 + i * 72)} y={s(88)} width={s(40)} height={s(2.5)} rx={s(1)} fill={pal.panel} opacity={2} />
+          </g>
+        ))}
+        {/* Bottom line */}
+        <rect x={0} y={height - s(14)} width={width} height={s(14)} fill={isDarkSlide ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.04)"} />
+        <g transform={`translate(${width - s(38)}, ${height - s(11)}) scale(${s(0.4)})`}><path d={ciscoBridge} fill={pal.textSoft} /></g>
+      </svg>
+    );
+  }
+
+  if (layout === 1) {
+    // Full dark slide with center content and ring chart
+    return (
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
+        <defs>
+          <linearGradient id={`${uid}bg`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#0d274d" /><stop offset="100%" stopColor="#041c32" />
+          </linearGradient>
+        </defs>
+        <rect width={width} height={height} fill={`url(#${uid}bg)`} />
+        <rect x={0} y={0} width={width} height={s(3)} fill="#00bceb" />
+        <text x={s(20)} y={s(20)} fontSize={s(5.5)} fill="rgba(255,255,255,0.45)" fontFamily="sans-serif" letterSpacing={s(2)}>USE CASE</text>
+        <text x={s(20)} y={s(42)} fontSize={s(11)} fontWeight="500" fill="#fff" fontFamily="sans-serif">{slide.title.slice(0, 35)}</text>
+        <text x={s(20)} y={s(56)} fontSize={s(6.5)} fill="rgba(255,255,255,0.55)" fontFamily="sans-serif">{slide.subtitle.slice(0, 48)}</text>
+        {/* Ring/donut chart */}
+        <circle cx={s(250)} cy={s(90)} r={s(35)} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={s(8)} />
+        <circle cx={s(250)} cy={s(90)} r={s(35)} fill="none" stroke="#00bceb" strokeWidth={s(8)} strokeDasharray={`${s(120)} ${s(100)}`} strokeLinecap="round" transform={`rotate(-90 ${s(250)} ${s(90)})`} />
+        <text x={s(250)} y={s(88)} fontSize={s(14)} fontWeight="600" fill="#00bceb" fontFamily="sans-serif" textAnchor="middle">{["72%", "95%", "4.1x", "60%"][(seed) % 4]}</text>
+        <text x={s(250)} y={s(100)} fontSize={s(5)} fill="rgba(255,255,255,0.4)" fontFamily="sans-serif" textAnchor="middle">IMPROVEMENT</text>
+        {/* Left bullets */}
+        {[0, 1, 2].map(i => (
+          <g key={i}>
+            <rect x={s(20)} y={s(72 + i * 20)} width={s(3)} height={s(12)} rx={s(1.5)} fill="#00bceb" opacity={0.7 - i * 0.2} />
+            <rect x={s(30)} y={s(74 + i * 20)} width={s(80 - i * 10)} height={s(2.5)} rx={s(1)} fill="rgba(255,255,255,0.18)" />
+            <rect x={s(30)} y={s(80 + i * 20)} width={s(55 - i * 8)} height={s(2)} rx={s(1)} fill="rgba(255,255,255,0.1)" />
+          </g>
+        ))}
+        <rect x={0} y={height - s(2)} width={width} height={s(2)} fill="#00bceb" opacity={0.5} />
+        <g transform={`translate(${width - s(40)}, ${height - s(16)}) scale(${s(0.45)})`}><path d={ciscoBridge} fill="rgba(255,255,255,0.3)" /></g>
+      </svg>
+    );
+  }
+
+  if (layout === 2) {
+    // Light slide with colored sidebar and icons
+    const acc = ["#049fd9", "#6cc04a", "#f5a623", "#e74c3c"][(seed * 3) % 4];
+    return (
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
+        <rect width={width} height={height} fill="#fff" />
+        <rect x={0} y={0} width={s(8)} height={height} fill={acc} />
+        <text x={s(20)} y={s(18)} fontSize={s(5.5)} fill="#a3a3a3" fontFamily="sans-serif" letterSpacing={s(1.5)}>USE CASE</text>
+        <text x={s(20)} y={s(38)} fontSize={s(11)} fontWeight="500" fill="#171717" fontFamily="sans-serif">{slide.title.slice(0, 35)}</text>
+        <text x={s(20)} y={s(52)} fontSize={s(6.5)} fill="#737373" fontFamily="sans-serif">{slide.subtitle.slice(0, 50)}</text>
+        {/* Three icon cards */}
+        {[0, 1, 2].map(i => (
+          <g key={i}>
+            <rect x={s(20 + i * 97)} y={s(64)} width={s(88)} height={s(78)} rx={s(3)} fill="#f8f9fa" stroke="#e8eaed" strokeWidth={s(0.5)} />
+            <circle cx={s(44 + i * 97)} cy={s(82)} r={s(8)} fill={acc} opacity={0.12} />
+            <circle cx={s(44 + i * 97)} cy={s(82)} r={s(4)} fill={acc} opacity={0.5} />
+            <rect x={s(30 + i * 97)} y={s(98)} width={s(60)} height={s(3)} rx={s(1.5)} fill="#dde1e5" />
+            <rect x={s(30 + i * 97)} y={s(106)} width={s(50)} height={s(2.5)} rx={s(1)} fill="#e8eaed" />
+            <rect x={s(30 + i * 97)} y={s(113)} width={s(65)} height={s(2.5)} rx={s(1)} fill="#e8eaed" />
+            <rect x={s(30 + i * 97)} y={s(120)} width={s(40)} height={s(2.5)} rx={s(1)} fill="#e8eaed" />
+            <rect x={s(30 + i * 97)} y={s(130)} width={s(50)} height={s(6)} rx={s(1.5)} fill={acc} opacity={0.15} />
+          </g>
+        ))}
+        <rect x={0} y={height - s(14)} width={width} height={s(14)} fill="#f5f5f5" />
+        <g transform={`translate(${width - s(40)}, ${height - s(11)}) scale(${s(0.4)})`}><path d={ciscoBridge} fill="#ccc" /></g>
+      </svg>
+    );
+  }
+
+  // layout === 3: Gradient slide with timeline/process
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: "block" }}>
-      <rect width={width} height={height} fill={bg} />
-      {/* Accent corner */}
-      <polygon points={`0,0 ${s(50)},0 0,${s(50)}`} fill={accentSoft} />
-      <rect x={0} y={0} width={s(3)} height={s(50)} fill={isDark ? darkAccent : accent} />
-      {/* Label */}
-      <text x={s(20)} y={s(18)} fontSize={s(6)} fill={fgSoft} fontFamily="sans-serif" letterSpacing={s(1.5)}>USE CASE</text>
-      {/* Title */}
-      <text x={s(20)} y={s(38)} fontSize={s(10)} fontWeight="500" fill={fg} fontFamily="sans-serif">{slide.title.slice(0, 42)}</text>
-      <text x={s(20)} y={s(52)} fontSize={s(7)} fill={fgMid} fontFamily="sans-serif">{slide.subtitle.slice(0, 55)}</text>
-      {/* Two column layout */}
-      <rect x={s(20)} y={s(65)} width={s(135)} height={s(80)} rx={s(2)} fill={surface} />
-      {lineWidths.slice(0, 4).map((w, i) => (
-        <rect key={i} x={s(30)} y={s(78 + i * 14)} width={w * 0.7} height={s(3)} rx={s(1.5)} fill={border} />
+      <defs>
+        <linearGradient id={`${uid}bg`} x1="0" y1="0" x2="1" y2="0.5">
+          <stop offset="0%" stopColor={pal.bg1} /><stop offset="100%" stopColor={pal.bg2} />
+        </linearGradient>
+      </defs>
+      <rect width={width} height={height} fill={`url(#${uid}bg)`} />
+      <text x={s(20)} y={s(18)} fontSize={s(5.5)} fill={pal.textSoft} fontFamily="sans-serif" letterSpacing={s(2)}>USE CASE</text>
+      <text x={s(20)} y={s(38)} fontSize={s(11)} fontWeight="500" fill={pal.text} fontFamily="sans-serif">{slide.title.slice(0, 38)}</text>
+      <text x={s(20)} y={s(52)} fontSize={s(6.5)} fill={pal.textSoft} fontFamily="sans-serif">{slide.subtitle.slice(0, 50)}</text>
+      {/* Process / timeline */}
+      <line x1={s(40)} y1={s(78)} x2={s(280)} y2={s(78)} stroke={pal.accent} strokeWidth={s(1)} opacity={0.3} />
+      {[0, 1, 2, 3].map(i => (
+        <g key={i}>
+          <circle cx={s(55 + i * 65)} cy={s(78)} r={s(10)} fill={pal.panel} />
+          <circle cx={s(55 + i * 65)} cy={s(78)} r={s(5)} fill={pal.accent} opacity={0.7 - i * 0.12} />
+          <rect x={s(38 + i * 65)} y={s(94)} width={s(35)} height={s(2.5)} rx={s(1)} fill={pal.panel} />
+          <rect x={s(42 + i * 65)} y={s(100)} width={s(26)} height={s(2)} rx={s(1)} fill={pal.panel} opacity={0.6} />
+        </g>
       ))}
-      {/* Right side: icon/diagram placeholder */}
-      <rect x={s(170)} y={s(65)} width={s(120)} height={s(80)} rx={s(2)} fill={surface} />
-      <circle cx={s(230)} cy={s(95)} r={s(16)} fill="none" stroke={accent} strokeWidth={s(1)} strokeDasharray={`${s(4)} ${s(3)}`} />
-      <circle cx={s(230)} cy={s(95)} r={s(8)} fill={accentSoft} />
-      <rect x={s(200)} y={s(120)} width={s(60)} height={s(3)} rx={s(1.5)} fill={border} />
-      <rect x={s(210)} y={s(128)} width={s(40)} height={s(3)} rx={s(1.5)} fill={border} opacity={0.6} />
-      {/* Bottom */}
-      <rect x={0} y={height - s(18)} width={width} height={s(18)} fill={surface} />
-      <g transform={`translate(${width - s(42)}, ${height - s(14)}) scale(${s(0.5)})`}><path d={ciscoBridge} fill={fgSoft} /></g>
+      {/* Bottom detail area */}
+      <rect x={s(20)} y={s(115)} width={s(280)} height={s(35)} rx={s(3)} fill={pal.panel} />
+      {[0, 1].map(i => (
+        <g key={i}>
+          <rect x={s(30 + i * 145)} y={s(122)} width={s(100)} height={s(2.5)} rx={s(1)} fill={isDarkSlide ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.08)"} />
+          <rect x={s(30 + i * 145)} y={s(128)} width={s(75)} height={s(2)} rx={s(1)} fill={isDarkSlide ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)"} />
+          <rect x={s(30 + i * 145)} y={s(134)} width={s(85)} height={s(2)} rx={s(1)} fill={isDarkSlide ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)"} />
+          <rect x={s(30 + i * 145)} y={s(140)} width={s(60)} height={s(2)} rx={s(1)} fill={isDarkSlide ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.03)"} />
+        </g>
+      ))}
+      <rect x={0} y={height - s(2)} width={width} height={s(2)} fill={pal.accent} opacity={0.5} />
+      <g transform={`translate(${width - s(40)}, ${height - s(16)}) scale(${s(0.45)})`}><path d={ciscoBridge} fill={pal.textSoft} /></g>
     </svg>
   );
 }
