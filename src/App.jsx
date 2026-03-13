@@ -616,6 +616,99 @@ const tagsDef = {
   },
 };
 
+// ─── STORY THUMBNAILS ────────────────────────────────────────────────────────────
+
+const storyThumbnails = {
+  "st-1": { // Mercy Health — hospital network
+    grad: ["#0d7377", "#14919b"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(70)}) scale(${s(1)})`}><path d="M-30 -20h60v40h-60z" fill="none" stroke="#fff" strokeWidth="2" opacity=".3"/><path d="M-5 -30v20M-15 -20h20" stroke="#fff" strokeWidth="3" opacity=".6"/><rect x="-20" y="-8" width="8" height="16" rx="1" fill="#fff" opacity=".2"/><rect x="12" y="-8" width="8" height="16" rx="1" fill="#fff" opacity=".2"/><rect x="-4" y="4" width="8" height="16" rx="1" fill="#fff" opacity=".2"/></g>,
+    scene: (s) => <><rect x={s(20)} y={s(120)} width={s(280)} height={s(4)} rx={s(2)} fill="#fff" opacity=".08"/><circle cx={s(50)} cy={s(50)} r={s(15)} fill="#fff" opacity=".06"/><circle cx={s(270)} cy={s(40)} r={s(20)} fill="#fff" opacity=".05"/></>,
+  },
+  "st-2": { // Stanford Children's — telehealth
+    grad: ["#6366f1", "#818cf8"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><rect x="-35" y="-22" width="70" height="44" rx="4" fill="none" stroke="#fff" strokeWidth="2" opacity=".4"/><circle cx="0" cy="-5" r="10" fill="none" stroke="#fff" strokeWidth="2" opacity=".3"/><path d="M-8 8a12 12 0 0124 0" fill="none" stroke="#fff" strokeWidth="2" opacity=".3"/><circle cx="25" cy="-15" r="4" fill="#4ade80" opacity=".6"/></g>,
+    scene: (s) => <><rect x={s(30)} y={s(115)} width={s(80)} height={s(3)} rx={s(1)} fill="#fff" opacity=".1"/><rect x={s(30)} y={s(125)} width={s(50)} height={s(3)} rx={s(1)} fill="#fff" opacity=".07"/></>,
+  },
+  "st-3": { // Broward Schools — campus wifi
+    grad: ["#0891b2", "#22d3ee"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><rect x="-25" y="-5" width="50" height="30" rx="2" fill="none" stroke="#fff" strokeWidth="2" opacity=".3"/><path d="M-25 25h50" stroke="#fff" strokeWidth="2" opacity=".3"/><path d="M0 -25a25 25 0 00-20 10M0 -25a25 25 0 0120 10M0 -18a18 18 0 00-13 7M0 -18a18 18 0 0113 7" fill="none" stroke="#fff" strokeWidth="2" opacity=".4"/><circle cx="0" cy="-10" r="2" fill="#fff" opacity=".6"/></g>,
+    scene: (s) => <><rect x={s(40)} y={s(115)} width={s(60)} height={s(20)} rx={s(2)} fill="#fff" opacity=".05"/><rect x={s(110)} y={s(115)} width={s(60)} height={s(20)} rx={s(2)} fill="#fff" opacity=".05"/><rect x={s(180)} y={s(115)} width={s(60)} height={s(20)} rx={s(2)} fill="#fff" opacity=".05"/></>,
+  },
+  "st-4": { // ASU — hybrid learning
+    grad: ["#b91c1c", "#ef4444"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><path d="M0 -28l30 15-30 15-30-15z" fill="none" stroke="#fff" strokeWidth="2" opacity=".4"/><path d="M-30 2l30 15 30-15" fill="none" stroke="#fff" strokeWidth="2" opacity=".2"/><path d="M30-13v20M27 12l3 5 3-5" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".3"/></g>,
+    scene: (s) => <><rect x={s(40)} y={s(110)} width={s(100)} height={s(3)} rx={s(1)} fill="#fff" opacity=".08"/><rect x={s(40)} y={s(120)} width={s(70)} height={s(3)} rx={s(1)} fill="#fff" opacity=".06"/></>,
+  },
+  "st-5": { // City of Atlanta — security
+    grad: ["#1e293b", "#334155"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><path d="M0-30c-20 0-30 10-30 10v20c0 15 30 28 30 28s30-13 30-28v-20s-10-10-30-10z" fill="none" stroke="#fff" strokeWidth="2" opacity=".35"/><path d="M-8 2l6 6 14-14" fill="none" stroke="#4ade80" strokeWidth="2.5" opacity=".6"/></g>,
+    scene: (s) => <><rect x={s(20)} y={s(120)} width={s(260)} height={s(2)} rx={s(1)} fill="#fff" opacity=".06"/><circle cx={s(50)} cy={s(130)} r={s(3)} fill="#4ade80" opacity=".15"/><circle cx={s(80)} cy={s(130)} r={s(3)} fill="#4ade80" opacity=".15"/><circle cx={s(110)} cy={s(130)} r={s(3)} fill="#4ade80" opacity=".15"/></>,
+  },
+  "st-6": { // VA Medical — converged
+    grad: ["#1e3a5f", "#2563eb"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><path d="M-5 -25v15M-15 -15h20" stroke="#fff" strokeWidth="3" opacity=".5"/><rect x="-30" y="-5" width="25" height="35" rx="2" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".3"/><rect x="5" y="-5" width="25" height="35" rx="2" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".3"/><path d="M-5 10h10" stroke="#fff" strokeWidth="1.5" opacity=".2" strokeDasharray="2 2"/></g>,
+    scene: (s) => <><rect x={s(30)} y={s(120)} width={s(240)} height={s(3)} rx={s(1)} fill="#fff" opacity=".07"/></>,
+  },
+  "st-7": { // BMW — smart factory
+    grad: ["#374151", "#4b5563"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><rect x="-35" y="0" width="70" height="25" rx="2" fill="none" stroke="#fff" strokeWidth="2" opacity=".3"/><path d="M-20 0v-20h15v20M5 0v-15h15v15" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".25"/><circle cx="-12" cy="-8" r="3" fill="#fbbf24" opacity=".5"/><circle cx="12" cy="-5" r="3" fill="#fbbf24" opacity=".5"/><path d="M-30 25h60" stroke="#fff" strokeWidth="1" opacity=".15"/></g>,
+    scene: (s) => <><rect x={s(20)} y={s(115)} width={s(40)} height={s(25)} rx={s(1)} fill="#fff" opacity=".04"/><rect x={s(70)} y={s(115)} width={s(40)} height={s(25)} rx={s(1)} fill="#fff" opacity=".04"/><rect x={s(120)} y={s(115)} width={s(40)} height={s(25)} rx={s(1)} fill="#fff" opacity=".04"/></>,
+  },
+  "st-8": { // Siemens — collaboration
+    grad: ["#0f766e", "#2dd4bf"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><rect x="-35" y="-20" width="30" height="20" rx="3" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".35"/><rect x="5" y="-20" width="30" height="20" rx="3" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".35"/><rect x="-15" y="5" width="30" height="20" rx="3" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".35"/><path d="M-5 0l-5 5M5 0l5 5" stroke="#fff" strokeWidth="1" opacity=".2"/></g>,
+    scene: (s) => <><circle cx={s(60)} cy={s(130)} r={s(8)} fill="#fff" opacity=".05"/><circle cx={s(100)} cy={s(125)} r={s(12)} fill="#fff" opacity=".04"/><circle cx={s(250)} cy={s(135)} r={s(10)} fill="#fff" opacity=".04"/></>,
+  },
+  "st-9": { // Nordstrom — retail wifi
+    grad: ["#78350f", "#d97706"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><rect x="-30" y="-15" width="60" height="40" rx="3" fill="none" stroke="#fff" strokeWidth="2" opacity=".3"/><path d="M-30 -5h60" stroke="#fff" strokeWidth="1.5" opacity=".2"/><path d="M-10 5v15M0 0v20M10 5v15" stroke="#fff" strokeWidth="2" opacity=".15"/><path d="M0 -25a20 20 0 00-15 8M0 -25a20 20 0 0115 8" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".3"/><circle cx="0" cy="-18" r="2" fill="#fff" opacity=".5"/></g>,
+    scene: (s) => <><rect x={s(20)} y={s(120)} width={s(260)} height={s(2)} rx={s(1)} fill="#fff" opacity=".07"/></>,
+  },
+  "st-10": { // Sephora — contact center
+    grad: ["#831843", "#ec4899"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><circle cx="0" cy="-10" r="18" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".3"/><path d="M-18 -10a18 18 0 00-6 2v10a4 4 0 004 4h2M18 -10a18 18 0 016 2v10a4 4 0 01-4 4h-2" fill="none" stroke="#fff" strokeWidth="2" opacity=".35"/><circle cx="-5" cy="-12" r="2" fill="#fff" opacity=".3"/><circle cx="5" cy="-12" r="2" fill="#fff" opacity=".3"/><path d="M-6 -4a8 8 0 0012 0" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".3"/></g>,
+    scene: (s) => <><rect x={s(40)} y={s(115)} width={s(60)} height={s(3)} rx={s(1)} fill="#fff" opacity=".08"/><rect x={s(40)} y={s(123)} width={s(40)} height={s(3)} rx={s(1)} fill="#fff" opacity=".06"/></>,
+  },
+  "st-11": { // JPMorgan — trading floor
+    grad: ["#0c4a6e", "#0284c7"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><path d="M-30 20l10-15 10 8 10-25 10 12 10-8 10 15" fill="none" stroke="#fff" strokeWidth="2" opacity=".4"/><path d="M-30 20h70" stroke="#fff" strokeWidth="1" opacity=".2"/><rect x="20" y="-20" width="15" height="15" rx="2" fill="none" stroke="#4ade80" strokeWidth="1.5" opacity=".4"/><path d="M24 -16l4 4 6-8" fill="none" stroke="#4ade80" strokeWidth="1.5" opacity=".5"/></g>,
+    scene: (s) => <><rect x={s(20)} y={s(115)} width={s(50)} height={s(2)} rx={s(1)} fill="#4ade80" opacity=".08"/><rect x={s(80)} y={s(118)} width={s(50)} height={s(2)} rx={s(1)} fill="#f87171" opacity=".06"/><rect x={s(140)} y={s(113)} width={s(50)} height={s(2)} rx={s(1)} fill="#4ade80" opacity=".08"/></>,
+  },
+  "st-12": { // Umpqua Bank — video banking
+    grad: ["#4338ca", "#7c3aed"],
+    icon: (s) => <g transform={`translate(${s(160)},${s(65)}) scale(${s(1)})`}><rect x="-30" y="-18" width="45" height="36" rx="4" fill="none" stroke="#fff" strokeWidth="2" opacity=".35"/><path d="M15 -10l18-8v36l-18-8z" fill="none" stroke="#fff" strokeWidth="2" opacity=".3"/><circle cx="-8" cy="-3" r="8" fill="none" stroke="#fff" strokeWidth="1.5" opacity=".2"/><circle cx="-8" cy="-6" r="3" fill="#fff" opacity=".15"/></g>,
+    scene: (s) => <><rect x={s(30)} y={s(115)} width={s(90)} height={s(3)} rx={s(1)} fill="#fff" opacity=".08"/><rect x={s(30)} y={s(123)} width={s(60)} height={s(3)} rx={s(1)} fill="#fff" opacity=".06"/></>,
+  },
+};
+
+function StoryThumbnail({ storyId, width = 320, height = 180, style = {} }) {
+  const t = storyThumbnails[storyId];
+  if (!t) return <div style={{ width, height, background: C.accentSoft, ...style }} />;
+  const s = (v) => v * width / 320;
+  return (
+    <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice" style={{ display: "block", ...style }}>
+      <defs>
+        <linearGradient id={`sg-${storyId}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor={t.grad[0]} />
+          <stop offset="100%" stopColor={t.grad[1]} />
+        </linearGradient>
+      </defs>
+      <rect width={width} height={height} fill={`url(#sg-${storyId})`} />
+      {/* Subtle grid pattern */}
+      {Array.from({ length: 8 }).map((_, i) => (
+        <line key={`h${i}`} x1={0} y1={s(i * 25)} x2={width} y2={s(i * 25)} stroke="#fff" strokeWidth="0.5" opacity=".04" />
+      ))}
+      {Array.from({ length: 14 }).map((_, i) => (
+        <line key={`v${i}`} x1={s(i * 25)} y1={0} x2={s(i * 25)} y2={height} stroke="#fff" strokeWidth="0.5" opacity=".04" />
+      ))}
+      {t.scene(s)}
+      {t.icon(s)}
+      {/* Cisco logo mark */}
+      <text x={s(16)} y={s(170)} fontSize={s(9)} fill="#fff" opacity=".25" fontFamily="Inter, sans-serif" fontWeight="500">CISCO</text>
+    </svg>
+  );
+}
+
 // ─── STORIES DATA ────────────────────────────────────────────────────────────────
 const stories = [
   {
@@ -784,6 +877,32 @@ function generateMockSlides() {
   return out;
 }
 const allSlides = generateMockSlides();
+
+// ─── STORY SLIDES (3 per story: title, solution, outcome) ──────────────────────
+(function generateStorySlides() {
+  let sc = 200;
+  stories.forEach(story => {
+    const ids = [];
+    const base = { type: "story", storyId: story.id, productId: story.tags.products[0] || null, initiativeId: story.tags.initiatives[0] || null, useCaseIndex: null, verticals: [story.industry] };
+
+    // Title slide
+    const titleId = `ss-${++sc}`;
+    allSlides.push({ ...base, id: titleId, title: story.customer, subtitle: story.summary, storySlideVariant: "title", storyCustomer: story.customer, storyIndustry: story.industry, storyMetrics: story.metrics });
+    ids.push(titleId);
+
+    // Solution slide
+    const solId = `ss-${++sc}`;
+    allSlides.push({ ...base, id: solId, title: `${story.customer} — Solution`, subtitle: story.solution.slice(0, 120), storySlideVariant: "solution", storyCustomer: story.customer, storyIndustry: story.industry, storySolutionText: story.solution, storyProducts: story.tags.products, storyInitiatives: story.tags.initiatives });
+    ids.push(solId);
+
+    // Outcome slide
+    const outId = `ss-${++sc}`;
+    allSlides.push({ ...base, id: outId, title: `${story.customer} — Outcome`, subtitle: story.outcome.slice(0, 120), storySlideVariant: "outcome", storyCustomer: story.customer, storyIndustry: story.industry, storyMetrics: story.metrics, storyOutcomeText: story.outcome });
+    ids.push(outId);
+
+    story.storySlideIds = ids;
+  });
+})();
 
 // ─── BUYERS DATA ───────────────────────────────────────────────────────────────
 const buyers = {
@@ -1658,6 +1777,93 @@ function SlidePreview({ slide, width = 320, height = 180, responsive = false }) 
     );
   }
 
+  // ── story slides ──
+  if (slide.type === "story") {
+    const t = storyThumbnails[slide.storyId];
+    const grad1 = t ? t.grad[0] : "#1e293b";
+    const grad2 = t ? t.grad[1] : "#334155";
+
+    if (slide.storySlideVariant === "title") {
+      return (
+        <svg {...svgProps}>
+          <defs><linearGradient id={`${uid}sg`} x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor={grad1} /><stop offset="100%" stopColor={grad2} /></linearGradient></defs>
+          <rect width={width} height={height} fill={`url(#${uid}sg)`} />
+          {/* Grid lines */}
+          {Array.from({ length: 8 }).map((_, i) => <line key={i} x1={0} y1={s(i * 25)} x2={width} y2={s(i * 25)} stroke="#fff" strokeWidth="0.5" opacity=".03" />)}
+          <text x={s(20)} y={s(18)} fontSize={f(5)} fill="#fff" fontFamily="Inter, sans-serif" letterSpacing={s(2)} opacity={0.5}>CUSTOMER STORY</text>
+          <rect x={s(20)} y={s(24)} width={s(30)} height={s(1.5)} fill="#fff" opacity={0.3} />
+          <text x={s(20)} y={s(50)} fontSize={f(14)} fontWeight="500" fill="#fff" fontFamily="Inter, sans-serif">{slide.storyCustomer.slice(0, 28)}</text>
+          <text x={s(20)} y={s(68)} fontSize={f(7)} fill="#fff" fontFamily="Inter, sans-serif" opacity={0.7}>{slide.subtitle.slice(0, 55)}</text>
+          <text x={s(20)} y={s(80)} fontSize={f(7)} fill="#fff" fontFamily="Inter, sans-serif" opacity={0.7}>{slide.subtitle.slice(55, 110)}</text>
+          {/* Metrics */}
+          {(slide.storyMetrics || []).slice(0, 3).map((m, i) => (
+            <g key={i}>
+              <rect x={s(20 + i * 95)} y={s(100)} width={s(85)} height={s(48)} rx={s(3)} fill="rgba(255,255,255,0.08)" />
+              <text x={s(62 + i * 95)} y={s(124)} fontSize={f(14)} fontWeight="600" fill="#fff" fontFamily="Inter, sans-serif" textAnchor="middle">{m.value}</text>
+              <text x={s(62 + i * 95)} y={s(138)} fontSize={f(5.5)} fill="#fff" fontFamily="Inter, sans-serif" textAnchor="middle" opacity={0.6}>{m.label}</text>
+            </g>
+          ))}
+          <rect x={0} y={height - s(2)} width={width} height={s(2)} fill="#fff" opacity={0.2} />
+          <g transform={`translate(${width - s(40)}, ${height - s(14)}) scale(${s(0.45)})`}><path d={ciscoBridge} fill="rgba(255,255,255,0.25)" /></g>
+        </svg>
+      );
+    }
+
+    if (slide.storySlideVariant === "solution") {
+      return (
+        <svg {...svgProps}>
+          <rect width={width} height={height} fill="#fff" />
+          <rect x={0} y={0} width={s(6)} height={height} fill={grad1} />
+          <text x={s(18)} y={s(18)} fontSize={f(5)} fill="#222" fontFamily="Inter, sans-serif" letterSpacing={s(2)}>SOLUTION</text>
+          <text x={s(18)} y={s(38)} fontSize={f(10)} fontWeight="500" fill="#111" fontFamily="Inter, sans-serif">{slide.storyCustomer.slice(0, 32)}</text>
+          {/* Solution text lines */}
+          {[0, 1, 2, 3].map(i => (
+            <rect key={i} x={s(18)} y={s(52 + i * 10)} width={s(i < 3 ? 260 : 180)} height={s(3)} rx={s(1)} fill="#e5e7eb" />
+          ))}
+          {/* Product/initiative pills */}
+          {(slide.storyProducts || []).map((p, i) => (
+            <g key={i}>
+              <rect x={s(18 + i * 80)} y={s(100)} width={s(72)} height={s(18)} rx={s(9)} fill="#f3f4f6" stroke="#d1d5db" strokeWidth={s(0.5)} />
+              <text x={s(54 + i * 80)} y={s(112)} fontSize={f(5.5)} fill="#374151" fontFamily="Inter, sans-serif" textAnchor="middle">{tagsDef.products[p] || p}</text>
+            </g>
+          ))}
+          {(slide.storyInitiatives || []).slice(0, 2).map((init, i) => (
+            <g key={`i${i}`}>
+              <rect x={s(18 + i * 135)} y={s(126)} width={s(125)} height={s(18)} rx={s(9)} fill="#f3f4f6" stroke="#d1d5db" strokeWidth={s(0.5)} />
+              <text x={s(80 + i * 135)} y={s(138)} fontSize={f(5)} fill="#6b7280" fontFamily="Inter, sans-serif" textAnchor="middle">{(tagsDef.initiatives[init] || init).slice(0, 22)}</text>
+            </g>
+          ))}
+          <rect x={0} y={height - s(14)} width={width} height={s(14)} fill="#f5f5f5" />
+          <g transform={`translate(${width - s(40)}, ${height - s(11)}) scale(${s(0.4)})`}><path d={ciscoBridge} fill="#ccc" /></g>
+        </svg>
+      );
+    }
+
+    // outcome variant
+    return (
+      <svg {...svgProps}>
+        <defs><linearGradient id={`${uid}og`} x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#0d274d" /><stop offset="100%" stopColor="#041c32" /></linearGradient></defs>
+        <rect width={width} height={height} fill={`url(#${uid}og)`} />
+        <rect x={0} y={0} width={width} height={s(3)} fill={grad2} />
+        <text x={s(20)} y={s(18)} fontSize={f(5)} fill="#fff" fontFamily="Inter, sans-serif" letterSpacing={s(2)} opacity={0.6}>OUTCOME</text>
+        <text x={s(20)} y={s(38)} fontSize={f(10)} fontWeight="500" fill="#fff" fontFamily="Inter, sans-serif">{slide.storyCustomer.slice(0, 32)}</text>
+        {/* Big metrics */}
+        {(slide.storyMetrics || []).slice(0, 3).map((m, i) => (
+          <g key={i}>
+            <text x={s(20 + i * 100)} y={s(72)} fontSize={f(16)} fontWeight="600" fill={grad2} fontFamily="Inter, sans-serif">{m.value}</text>
+            <text x={s(20 + i * 100)} y={s(84)} fontSize={f(5.5)} fill="#fff" fontFamily="Inter, sans-serif" opacity={0.5}>{m.label}</text>
+          </g>
+        ))}
+        {/* Outcome text lines */}
+        {[0, 1, 2].map(i => (
+          <rect key={i} x={s(20)} y={s(100 + i * 10)} width={s(i < 2 ? 260 : 170)} height={s(3)} rx={s(1)} fill="rgba(255,255,255,0.1)" />
+        ))}
+        <rect x={0} y={height - s(2)} width={width} height={s(2)} fill={grad2} opacity={0.6} />
+        <g transform={`translate(${width - s(40)}, ${height - s(14)}) scale(${s(0.45)})`}><path d={ciscoBridge} fill="rgba(255,255,255,0.25)" /></g>
+      </svg>
+    );
+  }
+
   // ── useCase slides: multiple visual layouts ──
   const pal = palettes[(pIdx + 2) % palettes.length];
   const isDarkSlide = !pal.bg1.startsWith("#f");
@@ -1911,10 +2117,9 @@ function DeckTray({ count, onClear, onPreview }) {
   );
 }
 
-function DeckBuilderPage() {
+function DeckBuilderPage({ selectedIds, setSelectedIds }) {
   const [vertical, setVertical] = useState("all");
   const [activeFilter, setActiveFilter] = useState(null);
-  const [selectedIds, setSelectedIds] = useState([]);
   const [lightboxSlide, setLightboxSlide] = useState(null);
   const [expandedNodes, setExpandedNodes] = useState({ company: true, solution: true, networking: true, collaboration: true });
   const [previewMode, setPreviewMode] = useState(false);
@@ -1967,8 +2172,8 @@ function DeckBuilderPage() {
     ? filteredSlides.filter(s => {
         if (activeFilter.type === "company") return s.type === "company";
         if (activeFilter.type === "solution") return s.type === "solution";
-        if (activeFilter.type === "product") return s.productId === activeFilter.productId && (s.type === "product" || s.type === "initiative" || s.type === "useCase");
-        if (activeFilter.type === "initiative") return s.initiativeId === activeFilter.initiativeId;
+        if (activeFilter.type === "product") return s.productId === activeFilter.productId && (s.type === "product" || s.type === "initiative" || s.type === "useCase" || s.type === "story");
+        if (activeFilter.type === "initiative") return s.initiativeId === activeFilter.initiativeId || (s.type === "story" && s.initiativeId === activeFilter.initiativeId);
         return true;
       })
     : filteredSlides;
@@ -1981,12 +2186,14 @@ function DeckBuilderPage() {
     if (companySlides.length) groups.push({ label: "Company", slides: companySlides });
     if (solutionSlides.length) groups.push({ label: "Solution Category", slides: solutionSlides });
     ["networking", "collaboration"].forEach(pid => {
-      const prodSlides = visibleSlides.filter(s => s.productId === pid);
+      const prodSlides = visibleSlides.filter(s => s.productId === pid && s.type !== "story");
       if (prodSlides.length) {
         const prodName = pid === "networking" ? "Cisco Networking" : "Collaboration";
         groups.push({ label: prodName, slides: prodSlides });
       }
     });
+    const storySlides = visibleSlides.filter(s => s.type === "story");
+    if (storySlides.length) groups.push({ label: "Customer Stories", slides: storySlides });
     return groups;
   };
   const groups = groupSlides();
@@ -2348,50 +2555,88 @@ function TagPill({ label, isActive, onClick, small }) {
   );
 }
 
-function StoryCard({ story, onClick }) {
+function StoryCard({ story, onClick, selectedIds, onAddToDeck }) {
   const prodLabels = story.tags.products.map(p => tagsDef.products[p]);
   const industryLabel = tagsDef.verticals[story.industry] || story.industry;
+  const slideIds = story.storySlideIds || [];
+  const allInDeck = slideIds.length > 0 && slideIds.every(id => selectedIds.includes(id));
+  const someInDeck = slideIds.some(id => selectedIds.includes(id));
   return (
     <div
       onClick={onClick}
       style={{
         border: `1px solid ${C.border}`, borderRadius: 2, background: C.bg, cursor: "pointer",
-        padding: 20, transition: "all 0.2s ease", display: "flex", flexDirection: "column", gap: 12,
+        transition: "all 0.2s ease", display: "flex", flexDirection: "column", overflow: "hidden",
       }}
       onMouseEnter={e => { e.currentTarget.style.borderColor = C.textTertiary; e.currentTarget.style.background = C.accentSoft; }}
       onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = C.bg; }}
     >
-      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-        <TagPill label={industryLabel} small />
-        {prodLabels.map(p => <TagPill key={p} label={p} small />)}
+      {/* Thumbnail */}
+      <div style={{ aspectRatio: "16/9", overflow: "hidden", position: "relative" }}>
+        <StoryThumbnail storyId={story.id} />
+        <div style={{ position: "absolute", bottom: 8, left: 8, display: "flex", gap: 4 }}>
+          <TagPill label={industryLabel} small />
+          {prodLabels.map(p => <TagPill key={p} label={p} small />)}
+        </div>
+        {/* Add to deck button */}
+        <div
+          onClick={e => { e.stopPropagation(); onAddToDeck(slideIds, allInDeck); }}
+          style={{
+            position: "absolute", top: 8, right: 8, width: 28, height: 28, borderRadius: 2,
+            background: allInDeck ? C.text : "rgba(255,255,255,0.9)", border: `1.5px solid ${allInDeck ? C.text : "rgba(150,150,150,0.5)"}`,
+            display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
+            transition: "all 0.15s", backdropFilter: allInDeck ? "none" : "blur(4px)",
+          }}
+          title={allInDeck ? "Remove from deck" : "Add slides to deck"}
+        >
+          {allInDeck ? (
+            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke={C.bg} strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>
+          ) : someInDeck ? (
+            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12" /></svg>
+          ) : (
+            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+          )}
+        </div>
       </div>
-      <div>
-        <div style={{ fontSize: 17, fontWeight: 400, color: C.text, marginBottom: 4 }}>{story.customer}</div>
-        <div style={{ fontSize: 13, color: C.textSecondary, fontWeight: 300, lineHeight: 1.6 }}>{story.summary}</div>
-      </div>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: "auto" }}>
-        {story.metrics.map((m, i) => (
-          <div key={i} style={{ fontSize: 12, color: C.textTertiary }}>
-            <span style={{ fontWeight: 600, color: C.text, marginRight: 4 }}>{m.value}</span>{m.label}
-          </div>
-        ))}
-      </div>
-      <div style={{ display: "flex", gap: 12, fontSize: 11, color: C.textTertiary }}>
-        {story.videoUrl !== null && <span>▶ Video</span>}
-        {story.deckSlideCount > 0 && <span>◻ {story.deckSlideCount} slides</span>}
-        <span style={{ marginLeft: "auto" }}>{story.date}</span>
+      {/* Content */}
+      <div style={{ padding: "14px 16px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+        <div>
+          <div style={{ fontSize: 15, fontWeight: 500, color: C.text, marginBottom: 4 }}>{story.customer}</div>
+          <div style={{ fontSize: 12, color: C.textSecondary, fontWeight: 300, lineHeight: 1.6, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{story.summary}</div>
+        </div>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: "auto" }}>
+          {story.metrics.map((m, i) => (
+            <div key={i} style={{ fontSize: 11, color: C.textTertiary }}>
+              <span style={{ fontWeight: 600, color: C.text, marginRight: 3 }}>{m.value}</span>{m.label}
+            </div>
+          ))}
+        </div>
+        <div style={{ display: "flex", gap: 12, fontSize: 10, color: C.textTertiary }}>
+          {story.videoUrl !== null && <span>▶ Video</span>}
+          <span>◻ {slideIds.length} slides</span>
+          <span style={{ marginLeft: "auto" }}>{story.date}</span>
+        </div>
       </div>
     </div>
   );
 }
 
-function StoryDetail({ story, onBack }) {
+function StoryDetail({ story, onBack, selectedIds, setSelectedIds }) {
   const sectionLabel = { fontSize: 10, letterSpacing: 2, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 8 };
   const bodyText = { fontSize: 14, color: C.textSecondary, lineHeight: 1.8, fontWeight: 300 };
   const industryLabel = tagsDef.verticals[story.industry] || story.industry;
   const prodLabels = story.tags.products.map(p => tagsDef.products[p]);
   const initLabels = story.tags.initiatives.map(i => tagsDef.initiatives[i]).filter(Boolean);
   const roleLabels = story.tags.buyerRoles.map(r => tagsDef.buyerRoles[r]).filter(Boolean);
+  const slideIds = story.storySlideIds || [];
+  const storySlides = slideIds.map(id => allSlides.find(s => s.id === id)).filter(Boolean);
+  const allInDeck = slideIds.length > 0 && slideIds.every(id => selectedIds.includes(id));
+  const toggleSlide = (id) => setSelectedIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  const addAllSlides = () => {
+    if (allInDeck) setSelectedIds(prev => prev.filter(id => !slideIds.includes(id)));
+    else setSelectedIds(prev => [...prev, ...slideIds.filter(id => !prev.includes(id))]);
+  };
+  const [lightboxSlide, setLightboxSlide] = useState(null);
 
   return (
     <div style={{ padding: "24px 32px", maxWidth: 800 }}>
@@ -2403,6 +2648,11 @@ function StoryDetail({ story, onBack }) {
         onMouseLeave={e => e.currentTarget.style.color = C.textTertiary}
       >
         ← All Stories
+      </div>
+
+      {/* Hero thumbnail */}
+      <div style={{ aspectRatio: "16/7", overflow: "hidden", borderRadius: 2, marginBottom: 24, border: `1px solid ${C.border}` }}>
+        <StoryThumbnail storyId={story.id} width={640} height={280} />
       </div>
 
       {/* Header */}
@@ -2457,30 +2707,68 @@ function StoryDetail({ story, onBack }) {
         <div style={{ fontSize: 11, color: C.textTertiary, marginTop: 8 }}>Video coming soon</div>
       </div>
 
-      {/* Deck preview placeholder */}
+      {/* Story Slides */}
       <div style={{ marginBottom: 40 }}>
-        <p style={sectionLabel}>Related Deck ({story.deckSlideCount} slides)</p>
-        <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 8 }}>
-          {Array.from({ length: Math.min(story.deckSlideCount, 6) }).map((_, i) => (
-            <div key={i} style={{
-              width: 160, minWidth: 160, aspectRatio: "16/9", background: C.accentSoft,
-              border: `1px solid ${C.border}`, borderRadius: 2, display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 10, color: C.textTertiary,
-            }}>
-              Slide {i + 1}
-            </div>
-          ))}
-          {story.deckSlideCount > 6 && (
-            <div style={{
-              width: 160, minWidth: 160, aspectRatio: "16/9", background: "transparent",
-              border: `1px dashed ${C.border}`, borderRadius: 2, display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 11, color: C.textTertiary,
-            }}>
-              +{story.deckSlideCount - 6} more
-            </div>
-          )}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+          <p style={{ ...sectionLabel, marginBottom: 0 }}>Story Slides ({storySlides.length})</p>
+          <button
+            onClick={addAllSlides}
+            style={{
+              background: allInDeck ? C.text : "none", color: allInDeck ? C.bg : C.text,
+              border: `1px solid ${C.text}`, borderRadius: 2, padding: "5px 14px", cursor: "pointer",
+              fontSize: 11, fontWeight: 500, transition: "all 0.15s", fontFamily: "inherit",
+            }}
+          >
+            {allInDeck ? "Remove All from Deck" : "Add All to Deck"}
+          </button>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 10 }}>
+          {storySlides.map(slide => {
+            const isInDeck = selectedIds.includes(slide.id);
+            return (
+              <div
+                key={slide.id}
+                onClick={() => setLightboxSlide(slide)}
+                style={{
+                  position: "relative", border: `1px solid ${isInDeck ? C.text : C.border}`, borderRadius: 2, overflow: "hidden",
+                  transition: "all 0.2s", boxShadow: isInDeck ? `0 0 0 1px ${C.text}` : "none", cursor: "pointer",
+                }}
+                onMouseEnter={e => { if (!isInDeck) e.currentTarget.style.borderColor = C.textTertiary; }}
+                onMouseLeave={e => { if (!isInDeck) e.currentTarget.style.borderColor = C.border; }}
+              >
+                <div style={{ aspectRatio: "16/9" }}>
+                  <SlidePreview slide={slide} width={320} height={180} responsive />
+                </div>
+                {/* Checkbox */}
+                <div
+                  onClick={e => { e.stopPropagation(); toggleSlide(slide.id); }}
+                  style={{
+                    position: "absolute", top: 6, left: 6, width: 18, height: 18,
+                    border: `1.5px solid ${isInDeck ? C.text : "rgba(150,150,150,0.7)"}`,
+                    borderRadius: 2, background: isInDeck ? C.text : "rgba(255,255,255,0.85)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    cursor: "pointer", transition: "all 0.15s",
+                  }}
+                >
+                  {isInDeck && <svg width={10} height={10} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>}
+                </div>
+                <div style={{ height: 2, background: isInDeck ? C.text : C.border }} />
+              </div>
+            );
+          })}
         </div>
       </div>
+
+      {/* Slide Lightbox */}
+      {lightboxSlide && (
+        <SlideLightbox
+          slide={lightboxSlide}
+          allFilteredSlides={storySlides}
+          onClose={() => setLightboxSlide(null)}
+          isSelected={(id) => selectedIds.includes(id)}
+          onToggle={(id) => setSelectedIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id])}
+        />
+      )}
 
       {/* Tags */}
       <div style={{ borderTop: `1px solid ${C.borderLight}`, paddingTop: 24 }}>
@@ -2504,12 +2792,41 @@ function StoryDetail({ story, onBack }) {
   );
 }
 
-function StoriesPage() {
+function StoriesPage({ selectedIds, setSelectedIds }) {
   const [vertical, setVertical] = useState("all");
   const [activeFilter, setActiveFilter] = useState(null);
   const [sortBy, setSortBy] = useState("date");
   const [selectedStory, setSelectedStory] = useState(null);
   const [expandedNodes, setExpandedNodes] = useState({ networking: true, collaboration: true });
+  const [activeProduct, setActiveProduct] = useState("networking");
+  const [expandedInit, setExpandedInit] = useState({});
+  const [panelWidth, setPanelWidth] = useState(280);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const PANEL_MIN = 200;
+  const PANEL_MAX = 720;
+  const WIDE_THRESHOLD = 420;
+  const isWide = panelWidth >= WIDE_THRESHOLD;
+
+  // Drag handler
+  useEffect(() => {
+    if (!isDragging) return;
+    const onMove = (e) => {
+      const x = e.clientX - 72; // offset for sidebar
+      setPanelWidth(Math.max(PANEL_MIN, Math.min(PANEL_MAX, x)));
+    };
+    const onUp = () => setIsDragging(false);
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+  }, [isDragging]);
 
   const toggleNode = (key) => setExpandedNodes(prev => ({ ...prev, [key]: !prev[key] }));
 
@@ -2567,13 +2884,17 @@ function StoriesPage() {
     <span style={{ fontSize: 9, color: C.textTertiary, marginLeft: "auto", flexShrink: 0 }}>{n}</span>
   );
 
+  const buyerRoles = Object.entries(tagsDef.buyerRoles);
   const products = fw.products;
+  const product = products.find(p => p.id === activeProduct);
+  const vData = vertical !== "all" && vertical !== "general" ? verticals[vertical] : null;
   const verticalOptions = [["all", "All Verticals"], ...Object.entries(verticals).map(([k, v]) => [k, v.label])];
+  const toggleInit = (id) => setExpandedInit(prev => ({ ...prev, [id]: !prev[id] }));
 
   return (
     <div style={{ display: "flex", height: "100%", overflow: "hidden" }}>
       {/* ── LEFT PANEL ── */}
-      <div style={{ width: 280, borderRight: `1px solid ${C.border}`, background: C.surface, display: "flex", flexDirection: "column", flexShrink: 0 }}>
+      <div style={{ width: panelWidth, borderRight: `1px solid ${C.border}`, background: C.surface, display: "flex", flexDirection: "column", flexShrink: 0 }}>
         {/* Header */}
         <div style={{ padding: "20px 16px 16px", borderBottom: `1px solid ${C.border}` }}>
           <h2 style={{ fontSize: 15, fontWeight: 500, letterSpacing: "-0.3px", color: C.text, marginBottom: 12 }}>Stories</h2>
@@ -2582,71 +2903,312 @@ function StoriesPage() {
           </select>
         </div>
 
-        {/* Tree navigation */}
-        <div style={{ flex: 1, overflowY: "auto", padding: "8px 0" }}>
-          {/* Products → Initiatives tree */}
-          {products.map(prod => {
-            const PIcon = prod.id === "networking" ? IconNetworking : IconCollaboration;
-            const isExpanded = expandedNodes[prod.id];
-            const prodFilter = { type: "product", productId: prod.id };
-            const prodCount = countFor(s => s.tags.products.includes(prod.id));
-            return (
-              <div key={prod.id}>
-                <div
-                  style={treeItemStyle(0, isFilterMatch(prodFilter))}
-                  onMouseEnter={e => { if (!isFilterMatch(prodFilter)) e.currentTarget.style.background = C.accentSoft; }}
-                  onMouseLeave={e => { if (!isFilterMatch(prodFilter)) e.currentTarget.style.background = isFilterMatch(prodFilter) ? C.accentSoft : "transparent"; }}
-                >
-                  <span onClick={() => toggleNode(prod.id)}>{chevron(isExpanded)}</span>
-                  <span onClick={() => setFilter(prodFilter)} style={{ display: "flex", alignItems: "center", gap: 6, flex: 1, overflow: "hidden" }}>
-                    <PIcon size={12} /> {prod.name}
-                  </span>
-                  {countBadge(prodCount)}
+        {/* Content — tree or diagram depending on width */}
+        <div style={{ flex: 1, overflowY: "auto", padding: isWide ? "16px 20px" : "8px 0" }}>
+          {isWide ? (
+            /* ── WIDE: Diagram View (matches Deck Builder) ── */
+            <>
+              {/* Company */}
+              <div style={{ marginBottom: 4 }}>
+                <p style={{ fontSize: 8, fontWeight: 500, letterSpacing: 1.5, textTransform: "uppercase", color: C.textTertiary, marginBottom: 4 }}>
+                  <IconCompany size={10} /> Company
+                </p>
+              </div>
+              <div
+                onClick={() => setFilter({ type: "company" })}
+                style={{
+                  padding: "14px 16px", border: `1px solid ${isFilterMatch({ type: "company" }) ? C.text : C.border}`, borderRadius: 2,
+                  background: isFilterMatch({ type: "company" }) ? C.accentSoft : C.bg, cursor: "pointer", transition: "all 0.15s ease",
+                }}
+                onMouseEnter={e => { if (!isFilterMatch({ type: "company" })) e.currentTarget.style.background = C.accentSoft; }}
+                onMouseLeave={e => { if (!isFilterMatch({ type: "company" })) e.currentTarget.style.background = isFilterMatch({ type: "company" }) ? C.accentSoft : C.bg; }}
+              >
+                <p style={{ fontSize: 13, fontWeight: 400, color: C.text, marginBottom: 2 }}>{fw.company.headline}</p>
+                <p style={{ fontSize: 11, color: C.textTertiary, fontWeight: 300 }}>{fw.company.tagline}</p>
+              </div>
+
+              {/* Connector */}
+              <div style={{ display: "flex", justifyContent: "center", padding: "4px 0" }}><div style={{ width: 1, height: 16, background: C.border }} /></div>
+
+              {/* Solution Category */}
+              <div style={{ marginBottom: 4 }}>
+                <p style={{ fontSize: 8, fontWeight: 500, letterSpacing: 1.5, textTransform: "uppercase", color: C.textTertiary, marginBottom: 4 }}>
+                  <IconSolution size={10} /> Solution Category
+                </p>
+              </div>
+              <div
+                onClick={() => setFilter({ type: "solution" })}
+                style={{
+                  padding: "14px 16px", border: `1px solid ${isFilterMatch({ type: "solution" }) ? C.text : C.border}`, borderRadius: 2,
+                  background: isFilterMatch({ type: "solution" }) ? C.accentSoft : C.bg, cursor: "pointer", transition: "all 0.15s ease",
+                }}
+                onMouseEnter={e => { if (!isFilterMatch({ type: "solution" })) e.currentTarget.style.background = C.accentSoft; }}
+                onMouseLeave={e => { if (!isFilterMatch({ type: "solution" })) e.currentTarget.style.background = isFilterMatch({ type: "solution" }) ? C.accentSoft : C.bg; }}
+              >
+                <p style={{ fontSize: 13, fontWeight: 400, color: C.text, marginBottom: 2 }}>{fw.solutionCategory.headline}</p>
+                <p style={{ fontSize: 11, color: C.textTertiary, fontWeight: 300 }}>{vData?.solutionTagline || fw.solutionCategory.tagline}</p>
+                <div style={{ display: "flex", gap: 4, marginTop: 8 }}>
+                  {fw.solutionCategory.pillars.map((p, i) => (
+                    <span key={i} style={{ fontSize: 8, color: C.textTertiary, padding: "2px 8px", border: `1px solid ${C.border}`, borderRadius: 100 }}>{p.label}</span>
+                  ))}
                 </div>
-                {isExpanded && prod.initiatives.map(init => {
-                  const initFilter = { type: "initiative", initiativeId: init.id };
-                  const initCount = countFor(s => s.tags.initiatives.includes(init.id));
+              </div>
+
+              {/* Split Connector */}
+              <svg width="100%" height="24" viewBox="0 0 400 24" preserveAspectRatio="none" style={{ display: "block" }}>
+                <line x1="200" y1="0" x2="200" y2="8" stroke={C.border} strokeWidth="1" />
+                <line x1="100" y1="8" x2="300" y2="8" stroke={C.border} strokeWidth="1" />
+                <line x1="100" y1="8" x2="100" y2="24" stroke={C.border} strokeWidth="1" />
+                <line x1="300" y1="8" x2="300" y2="24" stroke={C.border} strokeWidth="1" />
+              </svg>
+
+              {/* Product Tabs */}
+              <div style={{ marginBottom: 4 }}>
+                <p style={{ fontSize: 8, fontWeight: 500, letterSpacing: 1.5, textTransform: "uppercase", color: C.textTertiary }}>Product</p>
+              </div>
+              <div style={{ display: "flex", gap: 0, borderBottom: `1px solid ${C.border}`, marginBottom: 0 }}>
+                {products.map(p => {
+                  const isActive = activeProduct === p.id;
+                  const Icon = productIcons[p.id];
                   return (
-                    <div
-                      key={init.id}
-                      onClick={() => setFilter(initFilter)}
-                      style={treeItemStyle(1, isFilterMatch(initFilter))}
-                      onMouseEnter={e => { if (!isFilterMatch(initFilter)) e.currentTarget.style.background = C.accentSoft; }}
-                      onMouseLeave={e => { if (!isFilterMatch(initFilter)) e.currentTarget.style.background = isFilterMatch(initFilter) ? C.accentSoft : "transparent"; }}
-                    >
-                      <IconInitiative size={10} />
-                      <span style={{ overflow: "hidden", textOverflow: "ellipsis", flex: 1 }}>{init.name}</span>
-                      {countBadge(initCount)}
-                    </div>
+                    <button key={p.id} className="tab" onClick={() => setActiveProduct(p.id)} style={{
+                      flex: 1, padding: "8px 12px", fontSize: 11, fontWeight: isActive ? 500 : 300,
+                      color: isActive ? C.text : C.textTertiary,
+                      borderBottom: isActive ? `2px solid ${C.text}` : "2px solid transparent",
+                      marginBottom: -1, fontFamily: "inherit",
+                      display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+                    }}>
+                      <Icon size={12} /> {p.name}
+                    </button>
                   );
                 })}
               </div>
-            );
-          })}
 
-          {/* Divider */}
-          <div style={{ height: 1, background: C.borderLight, margin: "8px 16px" }} />
+              {/* Product Detail */}
+              {product && (
+                <div style={{ border: `1px solid ${C.border}`, borderTop: "none", borderRadius: "0 0 2px 2px", background: C.bg }}>
+                  <div style={{ padding: "12px 16px" }}>
+                    <p style={{ fontSize: 11, color: C.textSecondary, fontStyle: "italic", fontWeight: 300, marginBottom: 4 }}>{product.tagline}</p>
+                    <p style={{ fontSize: 10, color: C.textTertiary, lineHeight: 1.6, fontWeight: 300, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{product.description}</p>
+                  </div>
 
-          {/* Sort */}
-          <div style={{ padding: "4px 16px 8px" }}>
-            <div style={{ fontSize: 9, letterSpacing: 1.5, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 6 }}>Sort By</div>
-            <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{ ...selectStyle, width: "100%" }}>
-              <option value="date">Most Recent</option>
-              <option value="industry">Industry</option>
-              <option value="product">Product</option>
-            </select>
-          </div>
+                  <div style={{ height: 1, background: C.borderLight, margin: "0 16px" }} />
 
-          {/* Clear filter link */}
-          {activeFilter && (
-            <div
-              onClick={() => setActiveFilter(null)}
-              style={{ ...treeItemStyle(0, false), marginTop: 4, fontSize: 10, color: C.textTertiary, justifyContent: "center" }}
-              onMouseEnter={e => e.currentTarget.style.background = C.accentSoft}
-              onMouseLeave={e => e.currentTarget.style.background = "transparent"}
-            >
-              Show all stories
-            </div>
+                  {/* Initiatives */}
+                  <div style={{ padding: "12px 16px" }}>
+                    <p style={{ fontSize: 8, fontWeight: 500, letterSpacing: 1.5, textTransform: "uppercase", color: C.textTertiary, marginBottom: 8 }}>
+                      <IconInitiative size={10} /> Initiatives
+                    </p>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 1, background: C.border, border: `1px solid ${C.border}`, borderRadius: 2, overflow: "hidden" }}>
+                      {product.initiatives.map(init => {
+                        const isOpen = !!expandedInit[init.id];
+                        const initFilter = { type: "initiative", initiativeId: init.id };
+                        const isActive = isFilterMatch(initFilter);
+                        const initCount = countFor(s => s.tags.initiatives.includes(init.id));
+                        return (
+                          <div key={init.id} style={{ background: C.bg }}>
+                            <div
+                              style={{
+                                padding: "10px 12px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "flex-start",
+                                background: isActive ? C.accentSoft : C.bg, transition: "background 0.1s",
+                              }}
+                              onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = C.accentSoft; }}
+                              onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = isActive ? C.accentSoft : C.bg; }}
+                            >
+                              <div style={{ flex: 1 }} onClick={() => setFilter(initFilter)}>
+                                <p style={{ fontSize: 11, fontWeight: 500, color: C.text, marginBottom: 2, lineHeight: 1.3 }}>{init.name}</p>
+                                <p style={{ fontSize: 9, color: C.textTertiary, fontWeight: 300 }}>{init.tagline}</p>
+                              </div>
+                              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                                <span style={{ fontSize: 9, color: C.textTertiary }}>{initCount}</span>
+                                <span
+                                  onClick={(e) => { e.stopPropagation(); toggleInit(init.id); }}
+                                  style={{
+                                    fontSize: 14, color: C.textTertiary, fontWeight: 200, cursor: "pointer",
+                                    transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s", display: "inline-block", flexShrink: 0,
+                                  }}
+                                >&#8964;</span>
+                              </div>
+                            </div>
+                            {isOpen && (
+                              <div style={{ padding: "0 12px 10px" }}>
+                                <p style={{ fontSize: 8, fontWeight: 500, letterSpacing: 1, textTransform: "uppercase", color: C.textTertiary, marginBottom: 6 }}>Use Cases</p>
+                                {init.projects.map((proj, i) => (
+                                  <div key={i} style={{ padding: "4px 0", borderTop: i > 0 ? `1px solid ${C.borderLight}` : "none" }}>
+                                    <p style={{ fontSize: 10, fontWeight: 400, color: C.text }}>{proj.name}</p>
+                                    <p style={{ fontSize: 9, color: C.textTertiary, fontWeight: 300, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{proj.detail}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Divider */}
+              <div style={{ height: 1, background: C.borderLight, margin: "16px 0" }} />
+
+              {/* Sort */}
+              <div style={{ marginBottom: 12 }}>
+                <div style={{ fontSize: 9, letterSpacing: 1.5, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 6 }}>Sort By</div>
+                <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{ ...selectStyle, width: "100%" }}>
+                  <option value="date">Most Recent</option>
+                  <option value="industry">Industry</option>
+                  <option value="product">Product</option>
+                </select>
+              </div>
+
+              {/* Buyer Roles */}
+              <div style={{ marginBottom: 8 }}>
+                <div style={{ fontSize: 9, letterSpacing: 1.5, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 8 }}>Buyer Roles</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                  {buyerRoles.map(([key, label]) => {
+                    const roleFilter = { type: "buyerRole", roleId: key };
+                    const isActive = isFilterMatch(roleFilter);
+                    const roleCount = countFor(s => s.tags.buyerRoles.includes(key));
+                    if (roleCount === 0) return null;
+                    return (
+                      <div
+                        key={key}
+                        onClick={() => setFilter(roleFilter)}
+                        style={{
+                          padding: "3px 8px", fontSize: 10, borderRadius: 2, cursor: "pointer",
+                          border: `1px solid ${isActive ? C.text : C.border}`,
+                          background: isActive ? C.accentSoft : "transparent",
+                          color: isActive ? C.text : C.textSecondary,
+                          fontWeight: isActive ? 500 : 400,
+                          transition: "all 0.15s",
+                        }}
+                      >
+                        {label} <span style={{ fontSize: 9, color: C.textTertiary }}>{roleCount}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Clear filter */}
+              {activeFilter && (
+                <div
+                  onClick={() => setActiveFilter(null)}
+                  style={{ padding: "6px 0", fontSize: 10, color: C.textTertiary, cursor: "pointer", textAlign: "center" }}
+                  onMouseEnter={e => e.currentTarget.style.color = C.text}
+                  onMouseLeave={e => e.currentTarget.style.color = C.textTertiary}
+                >
+                  Show all stories
+                </div>
+              )}
+            </>
+          ) : (
+            /* ── NARROW: Compact Tree View ── */
+            <>
+              {/* Company */}
+              <div onClick={() => setFilter({ type: "company" })} style={treeItemStyle(0, isFilterMatch({ type: "company" }))} onMouseEnter={e => { if (!isFilterMatch({ type: "company" })) e.currentTarget.style.background = C.accentSoft; }} onMouseLeave={e => { if (!isFilterMatch({ type: "company" })) e.currentTarget.style.background = isFilterMatch({ type: "company" }) ? C.accentSoft : "transparent"; }}>
+                <IconCompany size={12} /> <span>One Cisco</span>
+              </div>
+              {/* Solution Category */}
+              <div onClick={() => setFilter({ type: "solution" })} style={treeItemStyle(0, isFilterMatch({ type: "solution" }))} onMouseEnter={e => { if (!isFilterMatch({ type: "solution" })) e.currentTarget.style.background = C.accentSoft; }} onMouseLeave={e => { if (!isFilterMatch({ type: "solution" })) e.currentTarget.style.background = isFilterMatch({ type: "solution" }) ? C.accentSoft : "transparent"; }}>
+                <IconSolution size={12} /> <span>Futureproof Workplace</span>
+              </div>
+              {/* Products → Initiatives tree */}
+              {products.map(prod => {
+                const PIcon = prod.id === "networking" ? IconNetworking : IconCollaboration;
+                const isExpanded = expandedNodes[prod.id];
+                const prodFilter = { type: "product", productId: prod.id };
+                const prodCount = countFor(s => s.tags.products.includes(prod.id));
+                return (
+                  <div key={prod.id}>
+                    <div
+                      style={treeItemStyle(0, isFilterMatch(prodFilter))}
+                      onMouseEnter={e => { if (!isFilterMatch(prodFilter)) e.currentTarget.style.background = C.accentSoft; }}
+                      onMouseLeave={e => { if (!isFilterMatch(prodFilter)) e.currentTarget.style.background = isFilterMatch(prodFilter) ? C.accentSoft : "transparent"; }}
+                    >
+                      <span onClick={() => toggleNode(prod.id)}>{chevron(isExpanded)}</span>
+                      <span onClick={() => setFilter(prodFilter)} style={{ display: "flex", alignItems: "center", gap: 6, flex: 1, overflow: "hidden" }}>
+                        <PIcon size={12} /> {prod.name}
+                      </span>
+                      {countBadge(prodCount)}
+                    </div>
+                    {isExpanded && prod.initiatives.map(init => {
+                      const initFilter = { type: "initiative", initiativeId: init.id };
+                      const initCount = countFor(s => s.tags.initiatives.includes(init.id));
+                      return (
+                        <div
+                          key={init.id}
+                          onClick={() => setFilter(initFilter)}
+                          style={treeItemStyle(1, isFilterMatch(initFilter))}
+                          onMouseEnter={e => { if (!isFilterMatch(initFilter)) e.currentTarget.style.background = C.accentSoft; }}
+                          onMouseLeave={e => { if (!isFilterMatch(initFilter)) e.currentTarget.style.background = isFilterMatch(initFilter) ? C.accentSoft : "transparent"; }}
+                        >
+                          <IconInitiative size={10} />
+                          <span style={{ overflow: "hidden", textOverflow: "ellipsis", flex: 1 }}>{init.name}</span>
+                          {countBadge(initCount)}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+
+              {/* Divider */}
+              <div style={{ height: 1, background: C.borderLight, margin: "8px 16px" }} />
+
+              {/* Sort */}
+              <div style={{ padding: "4px 16px 8px" }}>
+                <div style={{ fontSize: 9, letterSpacing: 1.5, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 6 }}>Sort By</div>
+                <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{ ...selectStyle, width: "100%" }}>
+                  <option value="date">Most Recent</option>
+                  <option value="industry">Industry</option>
+                  <option value="product">Product</option>
+                </select>
+              </div>
+
+              {/* Buyer Roles */}
+              <div style={{ height: 1, background: C.borderLight, margin: "8px 16px" }} />
+              <div style={{ padding: "4px 16px 8px" }}>
+                <div style={{ fontSize: 9, letterSpacing: 1.5, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 6 }}>Buyer Roles</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                  {buyerRoles.map(([key, label]) => {
+                    const roleFilter = { type: "buyerRole", roleId: key };
+                    const isActive = isFilterMatch(roleFilter);
+                    const roleCount = countFor(s => s.tags.buyerRoles.includes(key));
+                    if (roleCount === 0) return null;
+                    return (
+                      <div
+                        key={key}
+                        onClick={() => setFilter(roleFilter)}
+                        style={{
+                          padding: "3px 8px", fontSize: 10, borderRadius: 2, cursor: "pointer",
+                          border: `1px solid ${isActive ? C.text : C.border}`,
+                          background: isActive ? C.accentSoft : "transparent",
+                          color: isActive ? C.text : C.textSecondary,
+                          fontWeight: isActive ? 500 : 400,
+                          transition: "all 0.15s",
+                        }}
+                      >
+                        {label} <span style={{ fontSize: 9, color: C.textTertiary }}>{roleCount}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Clear filter link */}
+              {activeFilter && (
+                <div
+                  onClick={() => setActiveFilter(null)}
+                  style={{ ...treeItemStyle(0, false), marginTop: 4, fontSize: 10, color: C.textTertiary, justifyContent: "center" }}
+                  onMouseEnter={e => e.currentTarget.style.background = C.accentSoft}
+                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                >
+                  Show all stories
+                </div>
+              )}
+            </>
           )}
         </div>
 
@@ -2656,22 +3218,52 @@ function StoriesPage() {
         </div>
       </div>
 
+      {/* ── DRAG HANDLE ── */}
+      <div
+        onMouseDown={() => setIsDragging(true)}
+        style={{
+          width: 6, cursor: "col-resize", background: isDragging ? C.border : "transparent",
+          transition: "background 0.15s", flexShrink: 0, position: "relative", zIndex: 10,
+          marginLeft: -3, marginRight: -3,
+        }}
+        onMouseEnter={e => { if (!isDragging) e.currentTarget.style.background = C.borderLight; }}
+        onMouseLeave={e => { if (!isDragging) e.currentTarget.style.background = "transparent"; }}
+      />
+
       {/* ── RIGHT PANEL ── */}
-      <div style={{ flex: 1, overflowY: "auto" }}>
+      <div style={{ flex: 1, overflowY: "auto", paddingBottom: selectedIds.length > 0 ? 52 : 0 }}>
         {selectedStory ? (
-          <StoryDetail story={selectedStory} onBack={() => setSelectedStory(null)} />
+          <StoryDetail story={selectedStory} onBack={() => setSelectedStory(null)} selectedIds={selectedIds} setSelectedIds={setSelectedIds} />
         ) : (
           <div style={{ padding: "24px 32px" }}>
             {sorted.length === 0 ? (
               <div style={{ textAlign: "center", padding: "80px 0", color: C.textTertiary, fontSize: 13 }}>No stories match the current filter.</div>
             ) : (
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 16 }}>
-                {sorted.map(s => <StoryCard key={s.id} story={s} onClick={() => setSelectedStory(s)} />)}
+                {sorted.map(s => (
+                  <StoryCard
+                    key={s.id}
+                    story={s}
+                    onClick={() => setSelectedStory(s)}
+                    selectedIds={selectedIds}
+                    onAddToDeck={(ids, allIn) => {
+                      if (allIn) setSelectedIds(prev => prev.filter(id => !ids.includes(id)));
+                      else setSelectedIds(prev => [...prev, ...ids.filter(id => !prev.includes(id))]);
+                    }}
+                  />
+                ))}
               </div>
             )}
           </div>
         )}
       </div>
+
+      {/* ── DECK TRAY ── */}
+      <DeckTray
+        count={selectedIds.length}
+        onClear={() => setSelectedIds([])}
+        onPreview={() => {}}
+      />
     </div>
   );
 }
@@ -2682,14 +3274,15 @@ export default function App() {
   const [isDark, setIsDark] = useState(false);
   C = isDark ? dark : light;
   const [activePage, setActivePage] = useState("messaging");
+  const [selectedIds, setSelectedIds] = useState([]);
 
   const renderPage = () => {
     switch (activePage) {
       case "messaging": return <MessagingPage />;
       case "buyers": return <BuyersPage />;
       case "pitch": return <Placeholder title="Pitch" description="Pitch frameworks and talk tracks — coming soon." />;
-      case "stories": return <StoriesPage />;
-      case "deck": return <DeckBuilderPage />;
+      case "stories": return <StoriesPage selectedIds={selectedIds} setSelectedIds={setSelectedIds} />;
+      case "deck": return <DeckBuilderPage selectedIds={selectedIds} setSelectedIds={setSelectedIds} />;
       case "exec": return <Placeholder title="Exec Thought Leadership" description="Executive positioning and keynote themes — coming soon." />;
       case "competitive": return <Placeholder title="Competitive" description="Competitive positioning and battlecards — coming soon." />;
       default: return <MessagingPage />;
