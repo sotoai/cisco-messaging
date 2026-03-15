@@ -2529,7 +2529,6 @@ function DeckBuilderPage({ selectedIds, setSelectedIds }) {
 const navItems = [
   { id: "messaging", label: "Messaging", icon: NavIconMessaging },
   { id: "buyers", label: "Buyers", icon: NavIconBuyers },
-  { id: "pitch", label: "Pitch", icon: NavIconPitch },
   { id: "stories", label: "Stories", icon: NavIconStories },
   { id: "deck", label: "Deck Builder", icon: NavIconDeck },
   { id: "exec", label: "Exec", icon: NavIconExec },
@@ -3280,7 +3279,6 @@ export default function App() {
     switch (activePage) {
       case "messaging": return <MessagingPage />;
       case "buyers": return <BuyersPage />;
-      case "pitch": return <Placeholder title="Pitch" description="Pitch frameworks and talk tracks — coming soon." />;
       case "stories": return <StoriesPage selectedIds={selectedIds} setSelectedIds={setSelectedIds} />;
       case "deck": return <DeckBuilderPage selectedIds={selectedIds} setSelectedIds={setSelectedIds} />;
       case "exec": return <Placeholder title="Exec Thought Leadership" description="Executive positioning and keynote themes — coming soon." />;
