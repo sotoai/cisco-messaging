@@ -1,3 +1,19 @@
-node_modules
-dist
+# Frontend
+frontend/node_modules
+frontend/dist
+
+# Backend
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.venv/
+backend/venv/
+backend/storage/
+backend/storyos.db
+backend/*.pyc
+
+# General
+node_modules/
+dist/
 .DS_Store
+.env
+*.env.local
