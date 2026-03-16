@@ -7,6 +7,7 @@ import { IconCompany, IconSolution, IconNetworking, IconInitiative, productIcons
 import { SlideCard } from "../components/slides/SlideCard";
 import { SlideLightbox } from "../components/slides/SlideLightbox";
 import { DeckTray } from "../components/shared/DeckTray";
+import { UploadModal } from "../components/shared/UploadModal";
 
 const TYPE_LABELS = { company: "Company", solution: "Solution", product: "Product", initiative: "Initiative", useCase: "Use Case" };
 
@@ -21,6 +22,8 @@ export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
   const [isDragging, setIsDragging] = useState(false);
   const [activeProduct, setActiveProduct] = useState("networking");
   const [expandedInit, setExpandedInit] = useState({});
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [apiSlides, setApiSlides] = useState([]);
 
   const PANEL_MIN = 200;
   const PANEL_MAX = 720;
@@ -47,6 +50,22 @@ export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
     };
   }, [isDragging]);
 
+  const fetchApiSlides = async () => {
+    try {
+      const res = await fetch("/api/slides");
+      if (res.ok) {
+        const data = await res.json();
+        setApiSlides(data);
+      }
+    } catch (err) {
+      console.log("Backend not available, showing mock slides only");
+    }
+  };
+
+  useEffect(() => {
+    fetchApiSlides();
+  }, []);
+
   // Merge products for current vertical
   const getProducts = (v) => {
     if (v === "all" || v === "general" || !verticals[v]?.products) return fw.products;
@@ -57,7 +76,20 @@ export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
     });
   };
 
-  const filteredSlides = allSlides.filter(s => {
+  const normalizedApiSlides = apiSlides.map(s => ({
+    ...s,
+    type: s.tags?.type || "uploaded",
+    productId: s.tags?.product || null,
+    initiativeId: s.tags?.initiative || null,
+    verticals: s.tags?.vertical ? s.tags.vertical.split(",") : ["general"],
+    subtitle: s.title || `Slide ${s.slide_index + 1}`,
+    thumbnail_url: s.thumbnail_url,
+    _source: "api",
+  }));
+
+  const combinedSlides = [...allSlides, ...normalizedApiSlides];
+
+  const filteredSlides = combinedSlides.filter(s => {
     if (vertical === "all") return true;
     return s.verticals.includes(vertical) || s.verticals.includes("general");
   });
@@ -88,6 +120,8 @@ export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
     });
     const storySlides = visibleSlides.filter(s => s.type === "story");
     if (storySlides.length) groups.push({ label: "Customer Stories", slides: storySlides });
+    const uploadedSlides = visibleSlides.filter(s => s._source === "api");
+    if (uploadedSlides.length) groups.push({ label: "UPLOADED SLIDES", slides: uploadedSlides });
     return groups;
   };
   const groups = groupSlides();
@@ -97,7 +131,7 @@ export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
   };
   const toggleNode = (key) => setExpandedNodes(prev => ({ ...prev, [key]: !prev[key] }));
   const toggleInit = (id) => setExpandedInit(prev => ({ ...prev, [id]: !prev[id] }));
-  const selectedSlides = selectedIds.map(id => allSlides.find(s => s.id === id)).filter(Boolean);
+  const selectedSlides = selectedIds.map(id => combinedSlides.find(s => s.id === id)).filter(Boolean);
 
   const verticalOptions = [["all", "All Verticals"], ...Object.entries(verticals).map(([k, v]) => [k, v.label])];
   const products = getProducts(vertical === "all" ? "general" : vertical);
@@ -345,7 +379,26 @@ export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
       <div style={{ width: panelWidth, borderRight: `1px solid ${C.border}`, background: C.surface, display: "flex", flexDirection: "column", flexShrink: 0, position: "relative" }}>
         {/* Header */}
         <div style={{ padding: "20px 16px 16px", borderBottom: `1px solid ${C.border}` }}>
-          <h2 style={{ fontSize: 15, fontWeight: 500, letterSpacing: "-0.3px", color: C.text, marginBottom: 12 }}>Deck Builder</h2>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+            <h2 style={{ fontSize: 15, fontWeight: 500, letterSpacing: "-0.3px", color: C.text, margin: 0 }}>Deck Builder</h2>
+            <button
+              onClick={() => setShowUploadModal(true)}
+              title="Upload .pptx"
+              style={{
+                background: "none", border: `1px solid ${C.border}`, borderRadius: 2,
+                width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center",
+                cursor: "pointer", color: C.textTertiary, transition: "all 0.15s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = C.text; e.currentTarget.style.color = C.text; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.textTertiary; }}
+            >
+              <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+            </button>
+          </div>
           <select value={vertical} onChange={e => { setVertical(e.target.value); setActiveFilter(null); setExpandedInit({}); }} style={{ ...selectStyle, width: "100%" }}>
             {verticalOptions.map(([k, label]) => <option key={k} value={k}>{label}</option>)}
           </select>
@@ -412,6 +465,16 @@ export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
           onClose={() => { setLightboxSlide(null); setPreviewMode(false); }}
           isSelected={(id) => selectedIds.includes(id)}
           onToggle={toggleSlide}
+        />
+      )}
+
+      {/* ── UPLOAD MODAL ── */}
+      {showUploadModal && (
+        <UploadModal
+          onClose={() => setShowUploadModal(false)}
+          onUploadComplete={(deck) => {
+            fetchApiSlides();
+          }}
         />
       )}
     </div>

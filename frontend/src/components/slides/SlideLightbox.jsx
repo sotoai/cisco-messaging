@@ -30,7 +30,15 @@ export function SlideLightbox({ slide, allFilteredSlides, onClose, isSelected, o
         <button onClick={onClose} style={{ position: "absolute", top: 12, right: 12, background: "none", border: "none", cursor: "pointer", zIndex: 10, color: C.textTertiary, fontSize: 20, lineHeight: 1 }}>&times;</button>
         {/* Slide preview at full size */}
         <div style={{ width: "100%", lineHeight: 0 }}>
-          <SlidePreview slide={current} width={900} height={506} />
+          {current.thumbnail_url ? (
+            <img
+              src={current.thumbnail_url}
+              alt={current.title || "Slide"}
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+          ) : (
+            <SlidePreview slide={current} width={900} height={506} />
+          )}
         </div>
         {/* Bottom bar */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 24px", borderTop: `1px solid ${C.border}` }}>

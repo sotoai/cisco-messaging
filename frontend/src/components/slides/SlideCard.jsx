@@ -15,7 +15,15 @@ export function SlideCard({ slide, isSelected, onToggle, onPreview }) {
     >
       {/* Slide preview image – 16:9 aspect ratio */}
       <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
-        <SlidePreview slide={slide} width={320} height={180} responsive />
+        {slide.thumbnail_url ? (
+          <img
+            src={slide.thumbnail_url}
+            alt={slide.title || "Slide"}
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        ) : (
+          <SlidePreview slide={slide} width={320} height={180} responsive />
+        )}
         {/* Checkbox overlay */}
         <div
           onClick={e => { e.stopPropagation(); onToggle(); }}
