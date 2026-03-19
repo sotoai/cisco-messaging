@@ -67,7 +67,7 @@ export const fw = {
       name: "Cisco Networking",
       subtitle: "Campus & Branch",
       tagline: "One network. Your choice of management. Built for AI.",
-      description: "Cisco unifies Meraki and Catalyst into a single networking platform — one hardware lineup, one licensing model, your choice of cloud or on-prem management. AI-native assurance from ThousandEyes, agentic operations via AI Canvas, enterprise-grade Wi-Fi 7, and zero-trust security embedded at every layer deliver the infrastructure for the AI era. Recognized as a Leader in the IDC MarketScape for Enterprise WLAN and a five-time Gartner Magic Quadrant Leader for SD-WAN.",
+      description: "Cisco unifies Meraki and Catalyst into a single networking platform — one hardware lineup, one licensing model, your choice of cloud or on-prem management. AI-native assurance from ThousandEyes, agentic operations via Cross-Domain Operations, enterprise-grade Wi-Fi 7, and zero-trust security embedded at every layer deliver the infrastructure for the AI era. Recognized as a Leader in the IDC MarketScape for Enterprise WLAN and a five-time Gartner Magic Quadrant Leader for SD-WAN.",
       detail: {
         sections: [
           {
@@ -95,7 +95,7 @@ export const fw = {
               },
               {
                 title: "How It Works",
-                content: "Step 1: Cross-domain telemetry — ambient agents correlate data across network, security, and application domains. Step 2: Ensemble of models — foundation models plus the Deep Network Model (trained on 40M+ tokens of CCIE-level expertise) provide domain-specific reasoning. Step 3: Agents conduct tasks — troubleshooting, optimization, validation — and only escalate to humans when judgment is needed. Step 4: Multiple interfaces — dashboard, AI Assistant, AI Canvas, Cisco Cloud Control.",
+                content: "Step 1: Cross-domain telemetry — ambient agents correlate data across network, security, and application domains. Step 2: Ensemble of models — foundation models plus the Deep Network Model (trained on 40M+ tokens of CCIE-level expertise) provide domain-specific reasoning. Step 3: Agents conduct tasks — troubleshooting, optimization, validation — and only escalate to humans when judgment is needed. Step 4: Multiple interfaces — dashboard, AI Assistant, Cross-Domain Operations, Cisco Cloud Control.",
               },
               {
                 title: "New Capabilities (2026)",
@@ -105,8 +105,8 @@ export const fw = {
           },
           projects: [
             { name: "AgenticOps", detail: "Ambient agents monitoring the network 24/7, correlating cross-domain telemetry to detect anomalies. Ensemble of models including the Deep Network Model (40M+ CCIE-level tokens). Agents reason, diagnose root cause, test fixes on digital twins, and only escalate when judgment is needed. Troubleshooting, optimization, and validation — beta Q2 2026, select GA June 2026." },
-            { name: "AI Canvas", detail: "Multiplayer generative workspace unifying NetOps, SecOps, and DevOps with real-time telemetry from Meraki, ThousandEyes, and Splunk — not a dashboard, a collaborative workspace where operators and AI agents work together" },
-            { name: "AI Assistant for Networking", detail: "Natural language automation for switch migration, Wi-Fi setup, device onboarding, and root-cause analysis directly in the Meraki Dashboard" },
+            { name: "Cross-Domain Operations", detail: "Multiplayer generative workspace unifying NetOps, SecOps, and DevOps with real-time telemetry from Meraki, ThousandEyes, and Splunk — not a dashboard, a collaborative workspace where operators and AI agents work together" },
+            { name: "Natural Language NetOps", detail: "Natural language automation for switch migration, Wi-Fi setup, device onboarding, and root-cause analysis directly in the Meraki Dashboard" },
           ],
         },
         {

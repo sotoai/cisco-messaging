@@ -21,10 +21,10 @@ export const coAuthorDrafts = {
     ],
   },
   "Demo Script": {
-    title: "AgenticOps Live Demo — AI Canvas Walkthrough",
+    title: "AgenticOps Live Demo — Cross-Domain Operations Walkthrough",
     readingTime: "~8 min",
     sections: [
-      { heading: "VISUAL: Dashboard overview\nNARRATION:", body: "Welcome to AI Canvas — the multiplayer generative workspace that unifies NetOps, SecOps, and DevOps. What you're seeing is real-time telemetry from Meraki, ThousandEyes, and Splunk, all in one collaborative environment." },
+      { heading: "VISUAL: Dashboard overview\nNARRATION:", body: "Welcome to Cross-Domain Operations — the multiplayer generative workspace that unifies NetOps, SecOps, and DevOps. What you're seeing is real-time telemetry from Meraki, ThousandEyes, and Splunk, all in one collaborative environment." },
       { heading: "VISUAL: Anomaly detection\nNARRATION:", body: "An ambient agent just detected a coverage anomaly in Building 3. Watch as it correlates data across network, security, and application domains to identify the root cause — a rogue AP creating interference on the 6 GHz band." },
       { heading: "VISUAL: Automated remediation\nNARRATION:", body: "The agent proposes a fix: adjust channel allocation and power levels for three nearby APs. It tests the change against a digital twin first. Green across the board — the agent executes with one click of human approval." },
     ],
@@ -59,7 +59,7 @@ export const coAuthorDrafts = {
     sections: [
       { heading: "Email 1: The Wake-Up Call", body: "Subject: 89% of organizations aren't ready for what's coming\n\nHi [Name],\n\nGartner's latest research shows 62% of enterprises expect workloads to rise 30%+ in the next 2-3 years. Agents, IoT, and shadow AI are already flooding enterprise networks. Is your campus infrastructure ready?" },
       { heading: "Email 2: The Proof Point", body: "Subject: How Mercy Health saved $2.3M with one platform change\n\nHi [Name],\n\nMercy Health System consolidated from 3 network management tools to one — and cut incident resolution time by 40%. Here's how Cisco's Futureproof Workplace made it possible." },
-      { heading: "Email 3: The Ask", body: "Subject: 15 minutes to see what AgenticOps looks like in action\n\nHi [Name],\n\nI'd love to show you how AI Canvas — our multiplayer workspace for NetOps — detects, diagnoses, and resolves network issues before they impact users. Would next Tuesday or Thursday work for a quick demo?" },
+      { heading: "Email 3: The Ask", body: "Subject: 15 minutes to see what AgenticOps looks like in action\n\nHi [Name],\n\nI'd love to show you how Cross-Domain Operations — our multiplayer workspace for NetOps — detects, diagnoses, and resolves network issues before they impact users. Would next Tuesday or Thursday work for a quick demo?" },
     ],
   },
 };
@@ -67,7 +67,7 @@ export const coAuthorDrafts = {
 export const coAuthorQueue = [
   { id: "q-1", contentType: "Blog Post", objective: "Announce AgenticOps beta launch and drive registration", requester: "Summer F.", vertical: "general", product: "networking", urgency: "Critical", status: "In Review", date: "2026-03-15" },
   { id: "q-2", contentType: "Customer Brief", objective: "Mercy Health case study for healthcare vertical sales team", requester: "Craig T.", vertical: "healthcare", product: "networking", urgency: "Fast Track", status: "Draft", date: "2026-03-14" },
-  { id: "q-3", contentType: "Demo Script", objective: "AI Canvas live demo for Cisco Live EMEA mainstage", requester: "Gabe M.", vertical: "general", product: "networking", urgency: "Critical", status: "In Review", date: "2026-03-12" },
+  { id: "q-3", contentType: "Demo Script", objective: "Cross-Domain Operations live demo for Cisco Live EMEA mainstage", requester: "Gabe M.", vertical: "general", product: "networking", urgency: "Critical", status: "In Review", date: "2026-03-12" },
   { id: "q-4", contentType: "Social Post", objective: "LinkedIn series for Wi-Fi 7 AP launch week", requester: "Summer F.", vertical: "general", product: "networking", urgency: "Standard", status: "Published", date: "2026-03-10" },
   { id: "q-5", contentType: "Slide Narrative", objective: "Executive briefing deck for JPMorgan CISO meeting", requester: "Craig T.", vertical: "financial", product: "networking", urgency: "Fast Track", status: "Draft", date: "2026-03-08" },
   { id: "q-6", contentType: "Internal Memo", objective: "Competitive response brief on Arista CW-750 announcement", requester: "Gabe M.", vertical: "general", product: "networking", urgency: "Fast Track", status: "Published", date: "2026-03-05" },

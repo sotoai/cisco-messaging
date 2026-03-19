@@ -35,8 +35,8 @@ export const buyers = {
           id: "nb2",
           title: "Network Operations Manager",
           focus: "Day-to-day management, troubleshooting, uptime — cares about reducing alert fatigue",
-          priorities: ["AI Canvas for cross-domain troubleshooting", "Workflows Engine for automation", "ThousandEyes integration for end-to-end visibility"],
-          engagementTips: ["Demo AI Canvas with real telemetry — show autonomous root-cause analysis", "Highlight AgenticOps: AI agents that fix before humans escalate", "Show cross-domain correlation: network + security + observability in one view"],
+          priorities: ["Cross-Domain Operations for cross-domain troubleshooting", "Workflows Engine for automation", "ThousandEyes integration for end-to-end visibility"],
+          engagementTips: ["Demo Cross-Domain Operations with real telemetry — show autonomous root-cause analysis", "Highlight AgenticOps: AI agents that fix before humans escalate", "Show cross-domain correlation: network + security + observability in one view"],
         },
         {
           id: "nb3",

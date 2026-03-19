@@ -16,7 +16,7 @@ export const verticals = {
             { name: "Meraki Health Cloud", detail: "Cloud-managed networking purpose-built for multi-site health systems — unified dashboard across hospitals, clinics, and telehealth hubs" },
           ]},
           { id: "hn2", name: "AI-Powered Clinical Operations", tagline: "From alarm fatigue to autonomous triage.", projects: [
-            { name: "AI Canvas for Health IT", detail: "Cross-domain troubleshooting correlating network, security, and clinical application telemetry — MTTR reduction for EHR connectivity issues" },
+            { name: "Cross-Domain Operations for Health IT", detail: "Cross-domain troubleshooting correlating network, security, and clinical application telemetry — MTTR reduction for EHR connectivity issues" },
             { name: "ThousandEyes for Epic/Cerner", detail: "Synthetic monitoring of EHR application paths from nurse station to data center — proactive alerting before clinicians notice degradation" },
             { name: "Automated Compliance Reporting", detail: "Catalyst Center compliance audit for HIPAA, HITECH, and Joint Commission requirements — continuous posture validation" },
           ]},
