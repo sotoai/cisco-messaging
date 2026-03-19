@@ -8,6 +8,7 @@ import { BuyersPage } from "./pages/BuyersPage";
 import { StoriesPage } from "./pages/StoriesPage";
 import { DeckBuilderPage } from "./pages/DeckBuilderPage";
 import { CoAuthorPage } from "./pages/CoAuthorPage";
+import { CompetitivePage } from "./pages/CompetitivePage";
 
 // ─── NAV CONFIG ────────────────────────────────────────────────────────────────
 
@@ -35,7 +36,7 @@ export default function App({ embedded = false }) {
       case "stories": return <StoriesPage selectedIds={selectedIds} setSelectedIds={setSelectedIds} />;
       case "coauthor": return <CoAuthorPage setActivePage={setActivePage} />;
       case "deck": return <DeckBuilderPage selectedIds={selectedIds} setSelectedIds={setSelectedIds} />;
-      case "competitive": return <Placeholder title="Competitive" description="Competitive positioning and battlecards — coming soon." />;
+      case "competitive": return <CompetitivePage />;
       default: return <MessagingPage />;
     }
   };
@@ -88,7 +89,16 @@ export default function App({ embedded = false }) {
                   borderLeft: isActive ? `2px solid ${C.text}` : "2px solid transparent",
                 }}
               >
-                <Icon size={18} color={isActive ? C.text : C.textTertiary} />
+                <span style={{ position: "relative", display: "inline-flex" }}>
+                  <Icon size={18} color={isActive ? C.text : C.textTertiary} />
+                  {item.id === "competitive" && (
+                    <span style={{
+                      position: "absolute", top: -2, right: -4,
+                      width: 7, height: 7, borderRadius: "50%",
+                      background: "#e74c3c", border: `1.5px solid ${C.sidebarBg}`,
+                    }} />
+                  )}
+                </span>
                 <span style={{ fontSize: 9, fontWeight: isActive ? 500 : 400, letterSpacing: 0.5 }}>
                   {item.label}
                 </span>
