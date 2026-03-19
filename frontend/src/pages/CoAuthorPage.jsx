@@ -32,7 +32,7 @@ const coAuthorResponses = {
       slides: (slides) => slides.filter(s => (s.verticals.includes("healthcare") || s.productId === "networking") && (s.type === "initiative" || s.type === "useCase")).slice(0, 4),
       gaps: [
         { title: "No customer proof point for AI-powered clinical operations in community hospitals", description: "Current case studies focus on large health systems (200+ beds). Community hospitals under 200 beds have different budget constraints and IT staffing models that need a tailored proof point.", level: "Initiative" },
-        { title: "Missing competitive positioning against Aruba in healthcare wireless", description: "HPE Aruba is aggressively positioning their Wi-Fi 7 APs for clinical environments with dedicated IoMT SSIDs. Need a direct comparison slide showing Cisco's clinical-grade Wi-Fi advantages.", level: "Use Case" },
+        { title: "Missing competitive positioning against Aruba in healthcare wireless", description: "HPE Aruba is aggressively positioning their Wi-Fi 7 APs for clinical environments with dedicated IoMT SSIDs. Need a direct comparison slide showing Cisco's clinical-grade Wi-Fi advantages.", level: "Project" },
         { title: "No ROI calculator for clinical network modernization", description: "Health system CFOs need quantifiable cost-per-bed and MTTR improvement projections. A financial model slide would accelerate deal progression with procurement.", level: "Solution" },
       ],
       angles: [
@@ -56,7 +56,7 @@ const coAuthorResponses = {
     transcript: {
       slides: (slides) => slides.filter(s => (s.verticals.includes("government") || s.productId === "networking") && (s.type === "initiative" || s.type === "useCase")).slice(0, 4),
       gaps: [
-        { title: "No slide addressing CMMC 2.0 compliance for defense contractors", description: "Many government networking conversations involve defense industrial base companies that need CMMC Level 2 certification. Cisco's role in enabling CMMC compliance is undocumented in current slides.", level: "Use Case" },
+        { title: "No slide addressing CMMC 2.0 compliance for defense contractors", description: "Many government networking conversations involve defense industrial base companies that need CMMC Level 2 certification. Cisco's role in enabling CMMC compliance is undocumented in current slides.", level: "Project" },
         { title: "Missing state and local government modernization proof point", description: "Current government stories focus on federal agencies and large cities. State agencies and mid-size municipalities need relatable case studies with smaller-scale deployments.", level: "Initiative" },
       ],
       angles: [
@@ -121,7 +121,7 @@ const coAuthorResponses = {
     blog: {
       slides: (slides) => slides.filter(s => s.verticals.includes("general") && s.type === "initiative").slice(0, 3),
       gaps: [
-        { title: "No thought leadership content on Wi-Fi 7 adoption timeline", description: "Blog audiences need practical guidance on when to start their Wi-Fi 7 migration. A readiness assessment framework would generate leads and position Cisco as the advisor, not just the vendor.", level: "Use Case" },
+        { title: "No thought leadership content on Wi-Fi 7 adoption timeline", description: "Blog audiences need practical guidance on when to start their Wi-Fi 7 migration. A readiness assessment framework would generate leads and position Cisco as the advisor, not just the vendor.", level: "Project" },
       ],
       angles: [
         { title: "Wi-Fi 7 is not about speed — it is about reliability", description: "Most Wi-Fi 7 coverage focuses on raw throughput numbers. The real enterprise value is deterministic low-latency performance for AI workloads, IoT density, and real-time collaboration. Reframe the narrative from faster to more reliable.", tags: ["Wi-Fi 7", "Reliability", "Enterprise Wireless"] },

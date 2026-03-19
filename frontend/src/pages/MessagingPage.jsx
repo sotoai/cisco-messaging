@@ -300,11 +300,12 @@ export function MessagingPage() {
                         padding: "20px 20px 16px",
                         background: C.bg,
                         borderRadius: 0,
+                        minHeight: 110,
                       }}
                     >
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                         <div style={{ flex: 1 }}>
-                          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4, minHeight: 38 }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
                             {InitIcon && <InitIcon size={16} color={C.text} />}
                             <p style={{ fontSize: 14, fontWeight: 500, color: C.text, lineHeight: 1.35, margin: 0 }}>
                               {init.name}
@@ -344,7 +345,7 @@ export function MessagingPage() {
                       <div style={{ padding: "8px 20px 4px", display: "flex", alignItems: "center", gap: 5 }}>
                         <IconUseCase size={11} />
                         <span style={{ fontSize: 9, letterSpacing: 2, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase" }}>
-                          Use Cases
+                          Projects
                         </span>
                       </div>
                       {init.projects.map((proj, i) => (
@@ -367,7 +368,7 @@ export function MessagingPage() {
 
       <div style={{ marginTop: 48, paddingTop: 24, borderTop: `1px solid ${C.borderLight}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <p style={{ fontSize: 12, color: C.textTertiary, fontWeight: 300, lineHeight: 1.6 }}>
-          Company &rarr; Solution Category &rarr; Product &times;2 &rarr; Initiative &times;3 &rarr; Use Case &times;3
+          Company &rarr; Solution Category &rarr; Product &times;2 &rarr; Initiative &times;3 &rarr; Project &times;3
         </p>
         <CiscoLogo width={72} style={{ filter: C.logoFilter }} />
       </div>

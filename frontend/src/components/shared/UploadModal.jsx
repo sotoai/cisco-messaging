@@ -232,7 +232,7 @@ export function UploadModal({ onClose, onUploadComplete }) {
               <option value="solution">Solution</option>
               <option value="product">Product</option>
               <option value="initiative">Initiative</option>
-              <option value="useCase">Use Case</option>
+              <option value="useCase">Project</option>
               <option value="story">Story</option>
             </select>
             <button
@@ -357,7 +357,7 @@ export function UploadModal({ onClose, onUploadComplete }) {
                             <option value="solution">Solution</option>
                             <option value="product">Product</option>
                             <option value="initiative">Initiative</option>
-                            <option value="useCase">Use Case</option>
+                            <option value="useCase">Project</option>
                             <option value="story">Story</option>
                           </select>
                         </div>

@@ -9,7 +9,7 @@ import { SlideLightbox } from "../components/slides/SlideLightbox";
 import { DeckTray } from "../components/shared/DeckTray";
 import { UploadModal } from "../components/shared/UploadModal";
 
-const TYPE_LABELS = { company: "Company", solution: "Solution", product: "Product", initiative: "Initiative", useCase: "Use Case" };
+const TYPE_LABELS = { company: "Company", solution: "Solution", product: "Product", initiative: "Initiative", useCase: "Project" };
 
 
 export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
@@ -400,7 +400,7 @@ export function DeckBuilderPage({ selectedIds, setSelectedIds }) {
                     </div>
                     {isOpen && (
                       <div style={{ padding: "0 12px 10px" }}>
-                        <p style={{ fontSize: 8, fontWeight: 500, letterSpacing: 1, textTransform: "uppercase", color: C.textTertiary, marginBottom: 6 }}>Use Cases</p>
+                        <p style={{ fontSize: 8, fontWeight: 500, letterSpacing: 1, textTransform: "uppercase", color: C.textTertiary, marginBottom: 6 }}>Projects</p>
                         {init.projects.map((proj, i) => (
                           <div key={i} style={{ padding: "4px 0", borderTop: i > 0 ? `1px solid ${C.borderLight}` : "none" }}>
                             <p style={{ fontSize: 10, fontWeight: 400, color: C.text }}>{proj.name}</p>
