@@ -160,28 +160,50 @@ export function CompetitivePage() {
     </div>
   );
 
-  const renderTimeline = () => (
-    <div style={{ marginBottom: 40 }}>
-      <TierLabel>Recent Moves — Last 90 Days</TierLabel>
-      <div style={{ display: "flex", flexDirection: "column", gap: 0, marginTop: 16 }}>
-        {comp.recentMoves.map((item, i) => (
-          <div key={i} style={{ display: "flex", gap: 16, padding: "14px 0", borderBottom: i < comp.recentMoves.length - 1 ? `1px solid ${C.borderLight}` : "none" }}>
-            <span style={{ fontSize: 11, color: C.textTertiary, width: 65, flexShrink: 0 }}>{item.date}</span>
-            <span style={{ fontSize: 10, padding: "2px 0", width: 76, textAlign: "center", border: `1px solid ${categoryColors[item.category] || C.border}40`, borderRadius: 100, color: categoryColors[item.category] || C.textTertiary, fontWeight: 500, whiteSpace: "nowrap", alignSelf: "flex-start", flexShrink: 0 }}>{item.category}</span>
-            <div style={{ flex: 1 }}>
-              <p style={{ fontSize: 13, fontWeight: 500, color: C.text, marginBottom: 2 }}>{item.title}</p>
-              <p style={{ fontSize: 12, fontWeight: 300, color: C.textSecondary, lineHeight: 1.5 }}>{item.description}</p>
-              {item.url && (
-                <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: C.textTertiary, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 4, marginTop: 4 }}
-                  onMouseEnter={e => e.currentTarget.style.color = C.text}
-                  onMouseLeave={e => e.currentTarget.style.color = C.textTertiary}
-                >
-                  {item.source || "Source"} <span style={{ fontSize: 10 }}>{"\u2197"}</span>
-                </a>
-              )}
+  const renderTimelineAndPredictions = () => (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 32, marginBottom: 40 }}>
+      {/* Recent Moves */}
+      <div>
+        <TierLabel>Recent Moves — Last 90 Days</TierLabel>
+        <div style={{ display: "flex", flexDirection: "column", gap: 0, marginTop: 16 }}>
+          {comp.recentMoves.map((item, i) => (
+            <div key={i} style={{ display: "flex", gap: 16, padding: "14px 0", borderBottom: i < comp.recentMoves.length - 1 ? `1px solid ${C.borderLight}` : "none" }}>
+              <span style={{ fontSize: 11, color: C.textTertiary, width: 65, flexShrink: 0 }}>{item.date}</span>
+              <span style={{ fontSize: 10, padding: "2px 0", width: 76, textAlign: "center", border: `1px solid ${categoryColors[item.category] || C.border}40`, borderRadius: 100, color: categoryColors[item.category] || C.textTertiary, fontWeight: 500, whiteSpace: "nowrap", alignSelf: "flex-start", flexShrink: 0 }}>{item.category}</span>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: 13, fontWeight: 500, color: C.text, marginBottom: 2 }}>{item.title}</p>
+                <p style={{ fontSize: 12, fontWeight: 300, color: C.textSecondary, lineHeight: 1.5 }}>{item.description}</p>
+                {item.url && (
+                  <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: C.textTertiary, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 4, marginTop: 4 }}
+                    onMouseEnter={e => e.currentTarget.style.color = C.text}
+                    onMouseLeave={e => e.currentTarget.style.color = C.textTertiary}
+                  >
+                    {item.source || "Source"} <span style={{ fontSize: 10 }}>{"\u2197"}</span>
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      {/* Key Predictions */}
+      <div>
+        <TierLabel>Key Predictions</TierLabel>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
+          {comp.threats.predictions.map((pred, i) => (
+            <div key={i} style={{ padding: "16px 20px", border: `1px solid ${C.border}`, borderRadius: 2 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
+                <p style={{ fontSize: 13, fontWeight: 500, color: C.text, flex: 1, lineHeight: 1.4 }}>{pred.title}</p>
+                <span style={{ fontSize: 9, fontWeight: 500, padding: "2px 8px", borderRadius: 100, whiteSpace: "nowrap", marginLeft: 12,
+                  border: `1px solid ${pred.confidence === "High" ? "#27ae60" : pred.confidence === "Medium" ? "#d4a017" : C.border}`,
+                  color: pred.confidence === "High" ? "#27ae60" : pred.confidence === "Medium" ? "#d4a017" : C.textTertiary,
+                }}>{pred.confidence}</span>
+              </div>
+              <p style={{ fontSize: 12, color: C.textSecondary, lineHeight: 1.6, fontWeight: 300 }}>{pred.rationale}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -297,23 +319,6 @@ export function CompetitivePage() {
     <div id="section-threat-assessment" style={{ marginBottom: 40 }}>
       <TierLabel>Threat Assessment</TierLabel>
       <div style={{ marginTop: 16 }}>
-        {/* Predictions */}
-        <p style={{ fontSize: 10, letterSpacing: 2, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 10 }}>Key Predictions</p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
-          {comp.threats.predictions.map((pred, i) => (
-            <div key={i} style={{ padding: "16px 20px", border: `1px solid ${C.border}`, borderRadius: 2 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
-                <p style={{ fontSize: 13, fontWeight: 500, color: C.text, flex: 1, lineHeight: 1.4 }}>{pred.title}</p>
-                <span style={{ fontSize: 9, fontWeight: 500, padding: "2px 8px", borderRadius: 100, whiteSpace: "nowrap", marginLeft: 12,
-                  border: `1px solid ${pred.confidence === "High" ? "#27ae60" : pred.confidence === "Medium" ? "#d4a017" : C.border}`,
-                  color: pred.confidence === "High" ? "#27ae60" : pred.confidence === "Medium" ? "#d4a017" : C.textTertiary,
-                }}>{pred.confidence}</span>
-              </div>
-              <p style={{ fontSize: 12, color: C.textSecondary, lineHeight: 1.6, fontWeight: 300 }}>{pred.rationale}</p>
-            </div>
-          ))}
-        </div>
-
         {/* Messaging Conflicts */}
         <p style={{ fontSize: 10, letterSpacing: 2, fontWeight: 500, color: C.textTertiary, textTransform: "uppercase", marginBottom: 10 }}>Messaging Conflicts</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
@@ -411,7 +416,7 @@ export function CompetitivePage() {
       <div id="competitive-right-panel" style={{ flex: 1, overflowY: "auto" }}>
         <div style={{ padding: "24px 32px 96px", maxWidth: 960 }}>
           {renderAtAGlance()}
-          {renderTimeline()}
+          {renderTimelineAndPredictions()}
           {renderFramework()}
           {renderThreats()}
           {renderBattlecard()}
