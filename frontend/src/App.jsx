@@ -28,13 +28,14 @@ export default function App({ embedded = false }) {
   setTheme(isDark);
   const [activePage, setActivePage] = useState("messaging");
   const [selectedIds, setSelectedIds] = useState([]);
+  const [userDecks, setUserDecks] = useState([]);
 
   const renderPage = () => {
     switch (activePage) {
       case "messaging": return <MessagingPage />;
       case "buyers": return <BuyersPage />;
       case "stories": return <StoriesPage selectedIds={selectedIds} setSelectedIds={setSelectedIds} />;
-      case "coauthor": return <CoAuthorPage setActivePage={setActivePage} />;
+      case "coauthor": return <CoAuthorPage setActivePage={setActivePage} userDecks={userDecks} setUserDecks={setUserDecks} />;
       case "deck": return <DeckBuilderPage selectedIds={selectedIds} setSelectedIds={setSelectedIds} />;
       case "competitive": return <CompetitivePage />;
       default: return <MessagingPage />;

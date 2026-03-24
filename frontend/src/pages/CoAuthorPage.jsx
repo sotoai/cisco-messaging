@@ -3,11 +3,12 @@ import { C } from "../theme";
 import { fw } from "../data/framework";
 import { verticals } from "../data/verticals";
 import { tagsDef } from "../data/tags";
-import { allSlides } from "../data/slides";
+import { allSlides, slideLibrary } from "../data/slides";
 import { coAuthorDrafts, coAuthorQueue, coAuthorGaps, coAuthorAngles } from "../data/coauthor";
 import { moments, EVENT_TYPES } from "../data/moments";
 import { SlidePreview } from "../components/slides/SlidePreview";
 import { IconCollaboration } from "../components/icons/PageIcons";
+import { SlideShelf } from "../components/coauthor/SlideShelf";
 
 // ── Helpers ──
 const fmtDate = (d) => new Date(d + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
@@ -37,7 +38,17 @@ function PinIcon({ size = 12, filled = false, color }) {
   );
 }
 
-export function CoAuthorPage({ setActivePage }) {
+function scoreSlide(slide, { audiences, products, initiatives, vertical, pinnedItems }) {
+  let score = 0;
+  if (products.some(p => slide.products.includes(p))) score += 2;
+  if (initiatives.some(i => slide.initiatives.includes(i))) score += 3;
+  if (audiences.some(a => slide.audiences.includes(a))) score += 2;
+  if (slide.verticals.includes("all") || slide.verticals.includes(vertical)) score += 1;
+  if (pinnedItems.some(pin => pin.type === "deck" && slide.source.deckId === pin.id)) score += 4;
+  return score;
+}
+
+export function CoAuthorPage({ setActivePage, userDecks, setUserDecks }) {
   // Tab
   const [activeTab, setActiveTab] = useState("draft");
 
@@ -70,6 +81,10 @@ export function CoAuthorPage({ setActivePage }) {
   const [momentProductFilter, setMomentProductFilter] = useState("all");
   const timelineRef = useRef(null);
 
+  // Shelf / Deck
+  const [targetDeck, setTargetDeck] = useState("new");
+  const [shelfAddedIds, setShelfAddedIds] = useState([]);
+
   // Queue
   const [queueFilter, setQueueFilter] = useState("all");
 
@@ -78,11 +93,24 @@ export function CoAuthorPage({ setActivePage }) {
     .filter(p => productScope.includes(p.id))
     .flatMap(p => p.initiatives);
 
-  const relevantSlides = allSlides.filter(s => {
-    if (!productScope.includes(s.productId)) return false;
-    if (s.type === "story") return false;
-    return s.verticals.includes("general") || s.verticals.includes(vertical);
-  }).slice(0, 6);
+  // Shelf slide recommendations (scored from slideLibrary)
+  const scoredSlides = slideLibrary
+    .map(s => ({ ...s, _score: scoreSlide(s, { audiences: selectedAudiences, products: productScope, initiatives: initiativeScope, vertical, pinnedItems }) }))
+    .filter(s => s._score > 0)
+    .sort((a, b) => b._score - a._score)
+    .slice(0, 12);
+  const shelfMatchContext = [contentTypes.find(c => c.id === contentType)?.label, ...productScope.map(p => p === "networking" ? "Networking" : "Collaboration"), ...selectedAudiences.slice(0, 2).map(a => tagsDef.buyerRoles[a]), vertical !== "general" && verticals[vertical]?.label].filter(Boolean).join(" · ");
+  const handleAddToDeck = (slideId) => {
+    setShelfAddedIds(prev => [...prev, slideId]);
+    if (setUserDecks) {
+      setUserDecks(prev => {
+        const deckId = targetDeck === "new" ? "deck-coauthor-" + Date.now() : targetDeck;
+        const existing = prev.find(d => d.id === deckId);
+        if (existing) return prev.map(d => d.id === deckId ? { ...d, slides: [...d.slides, slideId] } : d);
+        return [...prev, { id: deckId, name: `${contentTypes.find(c => c.id === contentType)?.label || "Draft"} Deck`, slides: [slideId] }];
+      });
+    }
+  };
 
   const draft = coAuthorDrafts[contentType] || coAuthorDrafts["Blog Post"];
   const activeDraft = pinnedItems.length > 0 ? {
@@ -339,7 +367,7 @@ export function CoAuthorPage({ setActivePage }) {
       </div>
 
       {/* ═══ RIGHT PANEL ═══ */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", position: "relative" }}>
         {/* Tab bar */}
         <div style={{ display: "flex", gap: 24, padding: "0 32px", borderBottom: `1px solid ${C.border}`, flexShrink: 0 }}>
           {[
@@ -423,26 +451,6 @@ export function CoAuthorPage({ setActivePage }) {
 
                 {showRelated && (
                   <div style={{ marginTop: 16 }}>
-                    {/* Matched slides — horizontal scroll */}
-                    {relevantSlides.length > 0 && (
-                      <div style={{ marginBottom: 24 }}>
-                        <div style={labelMini}>Matched Slides</div>
-                        <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 8 }}>
-                          {relevantSlides.map(slide => (
-                            <div key={slide.id} style={{ width: 120, minWidth: 120, cursor: "pointer" }}>
-                              <div style={{ aspectRatio: "16/9", borderRadius: 2, overflow: "hidden", border: `1px solid ${C.border}`, background: C.surface, marginBottom: 4 }}>
-                                <SlidePreview slide={slide} width={320} height={180} responsive />
-                              </div>
-                              <p style={{ fontSize: 10, color: C.text, lineHeight: 1.3, fontWeight: 400, overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{slide.title}</p>
-                            </div>
-                          ))}
-                          <div onClick={() => setActivePage("deck")} style={{ width: 120, minWidth: 120, display: "flex", alignItems: "center", justifyContent: "center", border: `1px dashed ${C.border}`, borderRadius: 2, cursor: "pointer", fontSize: 10, color: C.textTertiary, textAlign: "center", padding: 8 }}
-                            onMouseEnter={e => e.currentTarget.style.borderColor = C.textTertiary} onMouseLeave={e => e.currentTarget.style.borderColor = C.border}
-                          >Open Deck Builder →</div>
-                        </div>
-                      </div>
-                    )}
-
                     {/* Gaps & Angles — flat list */}
                     <div style={labelMini}>Gaps & Angles</div>
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -635,6 +643,20 @@ export function CoAuthorPage({ setActivePage }) {
             </div>
           )}
         </div>
+
+        {/* Slide Shelf */}
+        {draftGenerated && activeTab === "draft" && (
+          <SlideShelf
+            slides={scoredSlides}
+            matchContext={shelfMatchContext}
+            onAddToDeck={handleAddToDeck}
+            addedIds={shelfAddedIds}
+            onOpenDeckBuilder={() => setActivePage("deck")}
+            userDecks={userDecks || []}
+            targetDeck={targetDeck}
+            setTargetDeck={setTargetDeck}
+          />
+        )}
       </div>
     </div>
   );

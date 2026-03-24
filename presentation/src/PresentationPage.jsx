@@ -4,42 +4,61 @@ import { ZoomContainer } from "./components/ZoomContainer";
 
 /*
   Phases:
-  1. "video"    → video plays; loader starts 1s before end, black fade covers artifacts
-  2. "loader"   → solid black bg, loader holds until user clicks
-  3. "reveal"   → loader animates out, black fades to reveal live app iframe
-  4. "live"     → app fully visible, interactive with zoom
+  1. "idle"     → black screen, waiting for Space to begin
+  2. "video"    → playing through video sequence (1→2→3)
+  3. "loader"   → solid black bg, loader holds until user clicks/space
+  4. "reveal"   → loader animates out, black fades to reveal live app iframe
+  5. "live"     → app fully visible, interactive with zoom
 */
 
-// The StoryOS app running on the frontend dev server
-const APP_URL = "http://localhost:5173/StoryOS/#embedded";
-
-const FADE_LEAD = 1.0;
+const VIDEOS = ["/video1.mp4", "/video2.mp4", "/video3.mp4"];
+const APP_URL = "http://localhost:5173/cisco-messaging/#embedded";
+const FADE_LEAD = 1.0; // seconds before last video ends to start fading
 
 export function PresentationPage() {
-  const [phase, setPhase] = useState("video");
+  const [phase, setPhase] = useState("idle");
+  const [videoIndex, setVideoIndex] = useState(0);
   const [videoFade, setVideoFade] = useState(0);
   const [loaderEarly, setLoaderEarly] = useState(false);
   const [loaderFading, setLoaderFading] = useState(false);
   const videoRef = useRef(null);
 
-  // Track video time to trigger early fade + loader
+  const isLastVideo = videoIndex === VIDEOS.length - 1;
+
+  // Track video time — only fade + show loader on the LAST video
   const handleTimeUpdate = useCallback(() => {
     const video = videoRef.current;
     if (!video || phase !== "video") return;
+    if (!isLastVideo) return;
+
     const remaining = video.duration - video.currentTime;
     if (remaining <= FADE_LEAD) {
       const fadeProgress = 1 - remaining / FADE_LEAD;
       setVideoFade(fadeProgress);
       if (!loaderEarly) setLoaderEarly(true);
     }
-  }, [phase, loaderEarly]);
+  }, [phase, isLastVideo, loaderEarly]);
 
   const handleVideoEnded = useCallback(() => {
-    setVideoFade(1);
-    setPhase("loader");
-  }, []);
+    if (isLastVideo) {
+      // Last video done → go to loader phase
+      setVideoFade(1);
+      setPhase("loader");
+    } else {
+      // Advance to next video
+      setVideoIndex((i) => i + 1);
+    }
+  }, [isLastVideo]);
 
-  // Click to dismiss loader and reveal app simultaneously
+  // When videoIndex changes, play the new video
+  useEffect(() => {
+    if (phase === "video" && videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(() => {});
+    }
+  }, [videoIndex, phase]);
+
+  // Click/space to dismiss loader and reveal app
   const handleLoaderClick = useCallback(() => {
     if (phase !== "loader") return;
     setLoaderFading(true);
@@ -53,18 +72,36 @@ export function PresentationPage() {
     setLoaderEarly(false);
   }, []);
 
-  // Keyboard: press R to restart, space/enter to dismiss loader
+  // Keyboard controls
   useEffect(() => {
     const handler = (e) => {
-      if (e.key === "r" && e.metaKey) return;
-      if (e.key === "r" && phase === "live") {
+      if (e.key === "r" && e.metaKey) return; // allow browser refresh
+
+      // Space starts the presentation from idle
+      if (e.key === " " && phase === "idle") {
+        e.preventDefault();
         setPhase("video");
+        setVideoIndex(0);
         setVideoFade(0);
         setLoaderEarly(false);
         setLoaderFading(false);
+        return;
       }
+
+      // Space/Enter/click advances from loader
       if ((e.key === " " || e.key === "Enter") && phase === "loader") {
+        e.preventDefault();
         handleLoaderClick();
+        return;
+      }
+
+      // R restarts from live
+      if (e.key === "r" && phase === "live") {
+        setPhase("idle");
+        setVideoIndex(0);
+        setVideoFade(0);
+        setLoaderEarly(false);
+        setLoaderFading(false);
       }
     };
     window.addEventListener("keydown", handler);
@@ -86,11 +123,33 @@ export function PresentationPage() {
         fontFamily: "'Space Grotesk', -apple-system, sans-serif",
       }}
     >
-      {/* Phase 1: Video */}
+      {/* Idle: prompt */}
+      {phase === "idle" && (
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 10,
+        }}>
+          <span style={{
+            color: "rgba(255,255,255,0.25)",
+            fontSize: 13,
+            fontFamily: "monospace",
+            letterSpacing: 1,
+          }}>
+            press space to begin
+          </span>
+        </div>
+      )}
+
+      {/* Video player */}
       {showVideo && (
         <video
           ref={videoRef}
-          src="/presentation-intro.mp4"
+          key={videoIndex}
+          src={VIDEOS[videoIndex]}
           autoPlay
           muted
           playsInline
@@ -106,7 +165,7 @@ export function PresentationPage() {
         />
       )}
 
-      {/* Black fade overlay — covers video artifacts at the end */}
+      {/* Black fade overlay — covers video artifacts at end of last video */}
       {showVideo && videoFade > 0 && (
         <div style={{
           position: "absolute",
@@ -118,7 +177,7 @@ export function PresentationPage() {
         }} />
       )}
 
-      {/* App layer — iframe always rendered, hidden until reveal for seamless transition */}
+      {/* App layer — iframe always rendered, hidden until reveal */}
       <div
         style={{
           position: "absolute",
@@ -141,7 +200,7 @@ export function PresentationPage() {
         </ZoomContainer>
       </div>
 
-      {/* Black overlay — fades out to reveal app while loader animates out on top */}
+      {/* Black overlay — fades out to reveal app while loader animates out */}
       {(phase === "loader" || phase === "reveal") && (
         <div style={{
           position: "absolute",
@@ -157,14 +216,14 @@ export function PresentationPage() {
         />
       )}
 
-      {/* Loader animation — animates out on top of everything */}
+      {/* Loader animation */}
       <StoryOSLoader
         visible={showLoader}
         fading={loaderFading}
         onExitComplete={handleExitComplete}
       />
 
-      {/* Phase indicator (dev only) */}
+      {/* Phase indicator (dev) */}
       <div style={{
         position: "fixed",
         bottom: 12,
@@ -175,8 +234,11 @@ export function PresentationPage() {
         zIndex: 100,
         pointerEvents: "none",
       }}>
-        {phase} {phase === "loader" && "· click to continue"}
-        {phase === "live" && "· press Z to zoom · R to restart"}
+        {phase === "idle" && "idle · space to start"}
+        {phase === "video" && `video ${videoIndex + 1}/${VIDEOS.length}`}
+        {phase === "loader" && "loader · click to continue"}
+        {phase === "reveal" && "revealing..."}
+        {phase === "live" && "live · Z to zoom · R to restart"}
       </div>
     </div>
   );
