@@ -82,7 +82,7 @@ export function MessagingPage() {
   const toggleInit = (id) => setExpandedInit(prev => ({ ...prev, [id]: !prev[id] }));
 
   return (
-    <PageShell title="Futureproof Workplace" subtitle="Corporate Messaging Framework">
+    <PageShell title="Narrative Architecture" subtitle="Futureproof Workplace — Messaging Hierarchy">
       {/* ── VERTICAL SELECTOR ── */}
       <div style={{ marginBottom: 32, display: "flex", alignItems: "center", gap: 10 }}>
         <span style={{ fontSize: 11, fontWeight: 500, color: C.textTertiary, letterSpacing: 1, textTransform: "uppercase" }}>Vertical</span>
